@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 require("./routes/arrival.routes.js")(app);
 
 // set port, listen for requests
-app.listen(9999, () => {
-  console.log("Server is running on port 9999.");
+app.listen(44444, () => {
+  console.log("Server is running on port 44444.");
 });
 
