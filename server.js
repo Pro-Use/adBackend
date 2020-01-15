@@ -15,10 +15,10 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("/routes/arrival.routes.js")(app);
+require("./routes/arrival.routes.js")(app);
 
 // set port, listen for requests
-app.listen(3000, () => {
-  console.log("Server is running on port 3000.");
+app.listen(9999, () => {
+  console.log("Server is running on port 9999.");
 });
 
