@@ -1,0 +1,7 @@
+
+> app@1.0.0 start /home/prouse/ad
+> node server.js
+
+Server is running on port 44444.
+Successfully connected to the database.
+arrivals:  []
