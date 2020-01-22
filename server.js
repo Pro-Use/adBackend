@@ -1,11 +1,9 @@
-if (process.env.NODE_ENV !== 'production'){
-  require('longjohn');
-}
 //
 const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+const WebSocket = require("ws");
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -20,6 +18,14 @@ app.get("/", (req, res) => {
 
 // routes
 require("./routes/arrival.routes.js")(app);
+
+// web socket
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on("connection", (webSocket) => {
+    console.info("Total connected clients:", wss.clients.size);
+    app.locals.clients = wss.clients;
+});
 
 // set port, listen for requests
 app.listen(44444, () => {
