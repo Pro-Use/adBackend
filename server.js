@@ -20,7 +20,13 @@ app.get("/", (req, res) => {
 require("./routes/arrival.routes.js")(app);
 
 // socket.io
-
+io.on('connection', function(client) {
+  console.log('a user is connected');
+  
+  client.on('join', function(data) {
+  console.log(data);
+  });
+});
 
 // set port, listen for requests
 server.listen(44444, () => {
