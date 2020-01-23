@@ -1,4 +1,5 @@
 const Arrival = require("../models/arrival.model.js");
+const io = require('../server').io;
 
 // Create and Save a new Arrival
 exports.create = (req, res) => {
@@ -54,7 +55,10 @@ exports.findOne = (req, res) => {
           message: "Error retrieving Arrival with id " + req.params.arrivalId
         });
       }
-    } else res.send(data);
+    } else {
+        io.sockets.emit('new_names', data);
+        res.send(data);
+    }
   });
 };
 
