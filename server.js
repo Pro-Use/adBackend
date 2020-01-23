@@ -1,9 +1,9 @@
-//
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const app = express();
-const WebSocket = require("ws");
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+module.exports.io = io; 
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -19,16 +19,11 @@ app.get("/", (req, res) => {
 // routes
 require("./routes/arrival.routes.js")(app);
 
-// web socket
-const wss = new WebSocket.Server({ port: 8080 });
+// socket.io
 
-wss.on("connection", (webSocket) => {
-    console.info("Total connected clients:", wss.clients.size);
-    app.locals.clients = wss.clients;
-});
 
 // set port, listen for requests
-app.listen(44444, () => {
+server.listen(44444, () => {
   console.log("Server is running on port 44444.");
 });
 
