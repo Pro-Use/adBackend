@@ -55,7 +55,7 @@ Arrival.getAll = result => {
 };
 
 Arrival.getBoard = result => {
-  sql.query("SELECT * FROM arrivals", (err, res) => {
+  sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 7", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
