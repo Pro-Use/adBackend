@@ -54,6 +54,19 @@ Arrival.getAll = result => {
   });
 };
 
+Arrival.getBoard = result => {
+  sql.query("SELECT * FROM arrivals", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("arrivals: ", res);
+    result(null, res);
+  });
+};
+
 Arrival.updateById = (id, arrival, result) => {
   sql.query(
     "UPDATE arrivals SET email = ?, name = ?, active = ? WHERE id = ?",

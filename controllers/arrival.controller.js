@@ -9,6 +9,8 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
+  // Moderate name TODO
+  var moderation_res = 1;
 
   // Create a Arrival
   const arrival = new Arrival({
@@ -16,7 +18,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     geo: req.body.geo,
     email: req.body.email,
-    moderated: req.body.moderated
+    moderated: moderation_res
   });
 
   // Save Arrival in the database
@@ -42,6 +44,21 @@ exports.findAll = (req, res) => {
   });
 };
 
+// Retrieve latest Arrivals from the database for the board.
+exports.findBoard = (req, res) => {
+  Arrival.getBoard((err, data) => {
+    if (err) {
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals."
+      });
+    } else {
+        io.sockets.emit('new_names', data);
+        res.send(data);
+    }
+  });
+};
+
 // Find a single Arrival with a arrivalId
 exports.findOne = (req, res) => {
   Arrival.findById(req.params.arrivalId, (err, data) => {
@@ -55,10 +72,7 @@ exports.findOne = (req, res) => {
           message: "Error retrieving Arrival with id " + req.params.arrivalId
         });
       }
-    } else {
-        io.sockets.emit('new_names', data);
-        res.send(data);
-    }
+    } else res.send(data);
   });
 };
 
