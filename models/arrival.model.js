@@ -62,7 +62,7 @@ Arrival.getBoard = result => {
       return;
     }
 
-    res.forEach(item => console.log(item));
+    res.forEach(item => console.log([0].ID));
     result(null, res);
   });
 };
