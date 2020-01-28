@@ -9,6 +9,9 @@ module.exports = app => {
 
   // Retrieve latest Arrivals for board
   app.get("/arrivals/board", arrivals.updateBoard);
+  
+  // Retrieve current Arrivals board
+  app.get("/arrivals/board", arrivals.findBoard);
 
   // Retrieve a single Arrival with arrivalId
   app.get("/arrivals/:arrivalId", arrivals.findOne);

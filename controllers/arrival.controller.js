@@ -44,6 +44,18 @@ exports.findAll = (req, res) => {
   });
 };
 
+// Retrieve current board.
+exports.findBoard = (req, res) => {
+  Arrival.getBoard((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals."
+      });
+    else res.send(data);
+  });
+};
+
 // Retrieve latest Arrivals from the database for the board.
 exports.updateBoard = (req, res) => {
   Arrival.newBoard((err, board, web_board) => {
