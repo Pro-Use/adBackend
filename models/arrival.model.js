@@ -6,7 +6,8 @@ sql.query("SELECT * FROM arrivals WHERE displayed = 1 LIMIT 7", (err, res) => {
       return;
     }
     res.forEach(function(item) {
-       board_array.push(item); 
+      console.log(item)
+      board_array.push(item); 
     });
 
 });
