@@ -1,6 +1,7 @@
 const sql = require("./db.js");
 var arrivals_board = [];
 var arrivals_web_board = [];
+
 sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7", 
 (err, res) => {
     if (err) {
@@ -98,6 +99,7 @@ Arrival.newBoard = result => {
             arrivals_board.pop();
             arrivals_web_board.pop();
         };
+        
         arrivals_web_board.unshift({'date': res[0].date, 'name': res[0].name});
     }
     result(null, arrivals_board, arrivals_web_board);
