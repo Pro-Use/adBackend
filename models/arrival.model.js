@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 var arrivals_board = [];
+var arrivals_web_board = [];
 sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7", 
 (err, res) => {
     if (err) {
@@ -7,9 +8,10 @@ sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7",
       return;
     }
     res.forEach(function(item) {
-      arrivals_board.push(item); 
+      arrivals_board.push(item);
+      arrivals_web_board.push({'date': item.date, 'name': item.name});
     });
-    console.log("arrivals_board=", arrivals_board);
+    console.log("arrivals_web_board=", arrivals_web_board);
 });
 
 
@@ -90,9 +92,11 @@ Arrival.newBoard = result => {
 //    console.log("old arr: " + arrivals_board.length + ", new arr: " + arrivals_board.unshift(res[0]));
         if (arrivals_board.unshift(res[0]) > 7) {
             arrivals_board.pop();
+            arrivals_web_board.pop();
         };
+        arrivals_web_board.unshift({'date': res[0].date, 'name': res[0].name});
     }
-    result(null, arrivals_board);
+    result(null, arrivals_board, arrivals_web_board);
   });
 };
 

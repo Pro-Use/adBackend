@@ -46,15 +46,15 @@ exports.findAll = (req, res) => {
 
 // Retrieve latest Arrivals from the database for the board.
 exports.updateBoard = (req, res) => {
-  Arrival.newBoard((err, data) => {
+  Arrival.newBoard((err, board, web_board) => {
     if (err) {
       res.status(500).send({
         message:
           err.message || "An error occurred while retrieving arrivals."
       });
     } else {
-        io.sockets.emit('new_names', data);
-        res.send(data);
+        io.sockets.emit('new_names', web_board);
+        res.send(board);
     }
   });
 };
