@@ -4,11 +4,11 @@ sql.query("SELECT * FROM arrivals WHERE displayed = 1 LIMIT 7", (err, res) => {
     if (err) {
       console.log("error: ", err);
       return;
-    } else {
-        res.forEach(function(item) {
-           board_array.push(item); 
-        });
     }
+    res.forEach(function(item) {
+       board_array.push(item); 
+    });
+
 });
 
 console.log("board_array=", board_array);
