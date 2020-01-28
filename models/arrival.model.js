@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const board_array = [];
 
 // constructor
 const Arrival = function(arrival) {
@@ -55,16 +56,17 @@ Arrival.getAll = result => {
 };
 
 Arrival.getBoard = result => {
+//  Get oldest result not yet displayed
   sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
-    console.log("Results len: ", res.length);
-    res.forEach(item => {
-        console.log("Displaying: ", item.ID);
-        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", [item.ID], 
+//    If there is an undisplayed result, set it to dipslayed
+    if (res.length === 1) {
+        console.log("Displaying: ", res[0].ID);
+        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", [res[0].ID], 
           (err) => {
             if (err) {
               console.log("error: ", err);
@@ -72,7 +74,8 @@ Arrival.getBoard = result => {
               return;
             }
         });
-    });
+    }
+    
     result(null, res);
   });
 };
