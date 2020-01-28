@@ -1,14 +1,13 @@
 const sql = require("./db.js");
-var board_array = (function() {
-  sql.query("SELECT * FROM arrivals WHERE displayed = 1 LIMIT 7", (err, res) => {
+var board_array = ( sql.query("SELECT * FROM arrivals WHERE displayed = 1 LIMIT 7", (err, res) => {
     if (err) {
       console.log("error: ", err);
-      return;
+      return [];
     }
     console.log("board_array=", res);
     return res;
-  });
-})();
+  })
+);
 
 // constructor
 const Arrival = function(arrival) {
