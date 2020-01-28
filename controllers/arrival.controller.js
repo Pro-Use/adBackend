@@ -45,8 +45,8 @@ exports.findAll = (req, res) => {
 };
 
 // Retrieve latest Arrivals from the database for the board.
-exports.findBoard = (req, res) => {
-  Arrival.getBoard((err, data) => {
+exports.updateBoard = (req, res) => {
+  Arrival.newBoard((err, data) => {
     if (err) {
       res.status(500).send({
         message:

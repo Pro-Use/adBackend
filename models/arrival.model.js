@@ -67,7 +67,7 @@ Arrival.getAll = result => {
   });
 };
 
-Arrival.getBoard = result => {
+Arrival.newBoard = result => {
 //  Get oldest result not yet displayed
   sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
     if (err) {
@@ -86,12 +86,12 @@ Arrival.getBoard = result => {
               return;
             }
         });
-    }
 //    Add the new result to existing results and remove oldest one
 //    console.log("old arr: " + arrivals_board.length + ", new arr: " + arrivals_board.unshift(res[0]));
-    if (arrivals_board.unshift(res[0]) > 7) {
-        arrivals_board.pop();
-    };
+        if (arrivals_board.unshift(res[0]) > 7) {
+            arrivals_board.pop();
+        };
+    }
     result(null, arrivals_board);
   });
 };
