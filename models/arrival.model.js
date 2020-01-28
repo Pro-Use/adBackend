@@ -1,18 +1,18 @@
 const sql = require("./db.js");
-var board_array = [];
-sql.query("SELECT * FROM arrivals WHERE displayed = 1 LIMIT 7", (err, res) => {
+var arrivals_board = [];
+sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7", 
+(err, res) => {
     if (err) {
       console.log("error: ", err);
       return;
     }
     res.forEach(function(item) {
-      console.log(item)
-      board_array.push(item); 
+      arrivals_board.push(item); 
     });
-
+    console.log("arrivals_board=", arrivals_board);
 });
 
-console.log("board_array=", board_array);
+
 // constructor
 const Arrival = function(arrival) {
   this.date = arrival.date;
@@ -88,11 +88,11 @@ Arrival.getBoard = result => {
         });
     }
 //    Add the new result to existing results and remove oldest one
-//    console.log("old arr: " + board_array.length + ", new arr: " + board_array.unshift(res[0]));
-    if (board_array.unshift(res[0]) > 7) {
-        board_array.pop();
+//    console.log("old arr: " + arrivals_board.length + ", new arr: " + arrivals_board.unshift(res[0]));
+    if (arrivals_board.unshift(res[0]) > 7) {
+        arrivals_board.pop();
     };
-    result(null, board_array);
+    result(null, arrivals_board);
   });
 };
 
