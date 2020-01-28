@@ -10,7 +10,6 @@ sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7",
     res.forEach(function(item) {
       arrivals_board.push(item);
       arrivals_web_board.push({'date': item.date, 'name': item.name});
-      console.log(item.date);
     });
     console.log("arrivals_web_board=", arrivals_web_board);
 });
@@ -68,6 +67,10 @@ Arrival.getAll = result => {
     console.log("arrivals: ", res);
     result(null, res);
   });
+};
+
+Arrival.getBoard = result => {
+    result(null, arrivals_web_board);
 };
 
 Arrival.newBoard = result => {
