@@ -1,5 +1,5 @@
 const sql = require("./db.js");
-const board_array = [];
+var board_array = [];
 
 // constructor
 const Arrival = function(arrival) {
@@ -75,8 +75,11 @@ Arrival.getBoard = result => {
             }
         });
     }
-    
-    result(null, res);
+//    Add the new result to existing results and remove oldest one
+    if (board_array.unshift(res) > 7) {
+        board_array.pop();
+    };
+    result(null, board_array);
   });
 };
 
