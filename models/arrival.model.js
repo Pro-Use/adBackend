@@ -55,15 +55,23 @@ Arrival.getAll = result => {
 };
 
 Arrival.getBoard = result => {
-  sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 7", (err, res) => {
+  sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
-
+    console.log("Results len: ", res.length);
     res.forEach(item => {
         console.log("Displaying: ", item.ID);
+        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", [item.ID], 
+          (err) => {
+            if (err) {
+              console.log("error: ", err);
+              result(null, err);
+              return;
+            }
+        });
     });
     result(null, res);
   });
