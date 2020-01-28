@@ -76,10 +76,10 @@ Arrival.getBoard = result => {
         });
     }
 //    Add the new result to existing results and remove oldest one
-    console.log("old arr: " + board_array.length + ", new arr: " + board_array.unshift(res[0]));
-//    if (board_array.unshift(res[0]) > 7) {
-//        board_array.pop();
-//    };
+//    console.log("old arr: " + board_array.length + ", new arr: " + board_array.unshift(res[0]));
+    if (board_array.unshift(res[0]) > 7) {
+        board_array.pop();
+    };
     result(null, board_array);
   });
 };
