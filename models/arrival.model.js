@@ -72,6 +72,7 @@ Arrival.getAll = result => {
 
 Arrival.getBoard = result => {
     result(null, arrivals_web_board);
+    console.log("arrivals web board: ", arrivals_web_board);
 };
 
 Arrival.newBoard = result => {
