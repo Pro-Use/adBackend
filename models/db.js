@@ -15,13 +15,26 @@ function executeQuery(sql, callback) {
             return callback(err, null);
         } else {
             if(connection) {
-                connection.query(sql, function (error, results, fields) {
-                connection.release();
-                if (error) {
-                    return callback(null, error);
-                } 
-                return callback(null, results);
-                });
+                if (Array.isArray(sql)) {
+                    connection.query(sql[0], sql[1], function (error, results, fields) {
+                    console.log(error);
+                    console.log(results);
+                    console.log(fields);
+                    connection.release();
+                    if (error) {
+                        return callback(null, error);
+                    } 
+                    return callback(null, results);
+                    });
+                } else {
+                    connection.query(sql, function (error, results, fields) {
+                    connection.release();
+                    if (error) {
+                        return callback(null, error);
+                    } 
+                    return callback(null, results);
+                    });
+                }
             }
         }
     });
