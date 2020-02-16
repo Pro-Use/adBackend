@@ -23,6 +23,7 @@ const Arrival = function(arrival) {
   this.geo = arrival.geo;
   this.email = arrival.email;
   this.moderated = arrival.moderated;
+  this.displayed = arrival.displayed;
 };
 
 Arrival.create = (newArrival, result) => {
