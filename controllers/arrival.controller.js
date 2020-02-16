@@ -12,13 +12,15 @@ exports.create = (req, res) => {
   // Moderate name TODO
   var moderation_res = 1;
 
+
   // Create a Arrival
   const arrival = new Arrival({
     date: req.body.date,
     name: req.body.name,
     geo: req.body.geo,
     email: req.body.email,
-    moderated: moderation_res
+    moderated: moderation_res,
+    displayed: 0
   });
 
   // Save Arrival in the database
