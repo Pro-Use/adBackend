@@ -33,7 +33,6 @@ Arrival.create = (newArrival, result) => {
       result(err, null);
       return;
     }
-    console.log(res);
     console.log("created arrival: ", { id: res.insertId, ...newArrival });
     result(null, { id: res.insertId, ...newArrival });
   });
