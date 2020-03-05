@@ -86,7 +86,8 @@ Arrival.newBoard = result => {
 //    If there is an undisplayed result, set it to dipslayed
     if (res.length === 1) {
         console.log("Displaying: ", res[0].ID);
-        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = 1", (err) => {
+        var displayed = res[0].ID;
+        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = 1", displayed, (err) => {
             if (err) {
               console.log("error: ", err);
               return;
