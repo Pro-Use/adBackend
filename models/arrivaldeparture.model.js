@@ -35,7 +35,7 @@ sql.query("SELECT * FROM departures WHERE displayed = 1 ORDER BY ID DESC LIMIT 7
 });
 
 // Arrivals constructor
-const Arrival = function(arrival) {
+export const Arrival = function(arrival) {
   this.date = arrival.date;
   this.name = arrival.name;
   this.geo = arrival.geo;
@@ -166,7 +166,7 @@ Arrival.remove = (id, result) => {
 };
 
 // Departures constructor
-const Departure = function(departure) {
+export const Departure = function(departure) {
   this.date = departure.date;
   this.name = departure.name;
   this.geo = departure.geo;
@@ -297,5 +297,5 @@ Departure.remove = (id, result) => {
 };
 
 // Module exports
-module.exports.Arrival = Arrival;
-module.exports.Departure = Departure;
+//module.exports.Arrival = Arrival;
+//module.exports.Departure = Departure;
