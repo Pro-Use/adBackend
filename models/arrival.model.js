@@ -77,16 +77,16 @@ Arrival.getBoard = result => {
 
 Arrival.newBoard = result => {
 //  Get oldest result not yet displayed
-  sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
+  var undisplayed = sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       return;
     }
-    
+    });  
 //    If there is an undisplayed result, set it to dipslayed
-    if (res.length === 1) {
-        console.log("Displaying: ", res[0].ID);
-        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", res[0].ID, (err, res) => {
+    if (undisplayed.length === 1) {
+        console.log("Displaying: ", undisplayed[0].ID);
+        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", undisplayed[0].ID, (err, res) => {
             if (err) {
               console.log("error: ", err);
               return;
@@ -94,15 +94,14 @@ Arrival.newBoard = result => {
         });
 //    Add the new result to existing results and remove oldest one
 //    console.log("old arr: " + arrivals_board.length + ", new arr: " + arrivals_board.unshift(res[0]));
-        if (arrivals_board.unshift(res[0]) > 7) {
+        if (arrivals_board.unshift(undisplayed[0]) > 7) {
             arrivals_board.pop();
             arrivals_web_board.pop();
         };
         
-        arrivals_web_board.unshift({'date': res[0].date, 'name': res[0].name});
+        arrivals_web_board.unshift({'date': undisplayed[0].date, 'name': undisplayed[0].name});
     }
     result(null, arrivals_board, arrivals_web_board);
-  });
 };
 
 Arrival.updateById = (id, arrival, result) => {
