@@ -50,8 +50,8 @@ io.on('connection', function(client) {
 
 // Update board every minute
 cron.schedule('* * * * *', () => {
-  board.updateBoard();
   console.log('Board updated');
+    console.log("Result:" + board.updateBoard());
 });
 
 // set port, listen for requests
