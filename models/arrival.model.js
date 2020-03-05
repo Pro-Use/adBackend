@@ -80,16 +80,15 @@ Arrival.newBoard = result => {
   sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(null, err);
       return;
     }
+    
 //    If there is an undisplayed result, set it to dipslayed
     if (res.length === 1) {
         console.log("Displaying: ", res[0].ID);
-        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", res[0].ID, (update_err, update_res) => {
-            if (update_err) {
+        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", res[0].ID, (err, res) => {
+            if (err) {
               console.log("error: ", err);
-              result(null, err);
               return;
             }
         });
