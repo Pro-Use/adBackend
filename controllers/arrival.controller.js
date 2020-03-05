@@ -59,19 +59,19 @@ exports.findBoard = (req, res) => {
 };
 
 // Retrieve latest Arrivals from the database for the board.
-exports.updateBoard = (req, res) => {
-  Arrival.newBoard((err, board, web_board) => {
-    if (err) {
-      res.status(500).send({
-        message:
-          err.message || "An error occurred while retrieving arrivals."
-      });
-    } else {
-        io.sockets.emit('new_names', web_board);
-        res.send(board);
-    }
-  });
-};
+//exports.updateBoard = (req, res) => {
+//  Arrival.newBoard((err, board, web_board) => {
+//    if (err) {
+//      res.status(500).send({
+//        message:
+//          err.message || "An error occurred while retrieving arrivals."
+//      });
+//    } else {
+//        io.sockets.emit('new_names', web_board);
+//        res.send(board);
+//    }
+//  });
+//};
 
 // Find a single Arrival with a arrivalId
 exports.findOne = (req, res) => {

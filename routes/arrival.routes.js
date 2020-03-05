@@ -8,7 +8,7 @@ module.exports = app => {
   app.get("/arrivals", arrivals.findAll);
 
   // Retrieve latest Arrivals for board
-  app.get("/arrivals/board", arrivals.updateBoard);
+//  app.get("/arrivals/board", arrivals.updateBoard);
   
   // Retrieve current Arrivals board
   app.get("/arrivals/webBoard", arrivals.findBoard);
