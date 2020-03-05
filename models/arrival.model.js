@@ -90,8 +90,10 @@ Arrival.newBoard = result => {
           (err, res) => {
             if (err) {
               console.log("error: ", err);
+              result(null, err);
               return;
             }
+            result(null, res);
         });
 //    Add the new result to existing results and remove oldest one
 //    console.log("old arr: " + arrivals_board.length + ", new arr: " + arrivals_board.unshift(res[0]));
