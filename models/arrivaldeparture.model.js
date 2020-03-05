@@ -119,6 +119,7 @@ Arrival.newBoard = result => {
         
         arrivals_web_board.unshift({'date': res[0].date, 'name': res[0].name});
     }
+     console.log("arrivals web board: ", arrivals_web_board);
     result(null, arrivals_board, arrivals_web_board);
   });
 };
@@ -250,6 +251,7 @@ Departure.newBoard = result => {
         
         departures_web_board.unshift({'date': res[0].date, 'name': res[0].name});
     }
+    console.log("departures web board: ", departures_web_board);
     result(null, departures_board, departures_web_board);
   });
 };

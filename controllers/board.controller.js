@@ -6,7 +6,6 @@ exports.updateArrivalsBoard = (io) => {
       console.log("An error occurred while retrieving arrivals.");
       
     } else {
-        console.log("Arrivals Board:"+web_board);
         io.sockets.emit('new_arrival', web_board);
     }
   });
@@ -18,7 +17,6 @@ exports.updateDeparturesBoard = (io) => {
       console.log("An error occurred while retrieving departures.");
       
     } else {
-        console.log("Departures Board:"+web_board);
         io.sockets.emit('new_departure', web_board);
     }
   });

@@ -53,7 +53,7 @@ board.updateArrivalsBoard(io);
 
 // Update board every minute
 cron.schedule('* * * * *', () => {
-  board.pdateArrivalsBoard(io);
+  board.updateArrivalsBoard(io);
   console.log('Board updated');
 });
 
