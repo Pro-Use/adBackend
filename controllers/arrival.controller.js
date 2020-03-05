@@ -1,5 +1,4 @@
-const Arrival = require("../models/arrivaldeparture.model.js");
-const io = require('../server').io;
+const Model = require("../models/arrivaldeparture.model.js");
 
 // Create and Save a new Arrival
 exports.create = (req, res) => {
@@ -14,7 +13,7 @@ exports.create = (req, res) => {
 
 
   // Create a Arrival
-  const arrival = new Arrival({
+  const arrival = new Model.Arrival({
     date: req.body.date,
     name: req.body.name,
     geo: req.body.geo,
@@ -24,7 +23,7 @@ exports.create = (req, res) => {
   });
 
   // Save Arrival in the database
-  Arrival.create(arrival, (err, data) => {
+  Model.Arrival.create(arrival, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -36,7 +35,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Arrivals from the database.
 exports.findAll = (req, res) => {
-  Arrival.getAll((err, data) => {
+  Model.Arrival.getAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -48,7 +47,7 @@ exports.findAll = (req, res) => {
 
 // Retrieve current board.
 exports.findBoard = (req, res) => {
-  Arrival.getBoard((err, data) => {
+  Model.Arrival.getBoard((err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -58,24 +57,9 @@ exports.findBoard = (req, res) => {
   });
 };
 
-// Retrieve latest Arrivals from the database for the board.
-//exports.updateBoard = (req, res) => {
-//  Arrival.newBoard((err, board, web_board) => {
-//    if (err) {
-//      res.status(500).send({
-//        message:
-//          err.message || "An error occurred while retrieving arrivals."
-//      });
-//    } else {
-//        io.sockets.emit('new_names', web_board);
-//        res.send(board);
-//    }
-//  });
-//};
-
 // Find a single Arrival with a arrivalId
 exports.findOne = (req, res) => {
-  Arrival.findById(req.params.arrivalId, (err, data) => {
+  Model.Arrival.findById(req.params.arrivalId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -99,9 +83,9 @@ exports.update = (req, res) => {
     });
   }
 
-  Arrival.updateById(
+  Model.Arrival.updateById(
     req.params.arrivalId,
-    new Arrival(req.body),
+    new Model.Arrival(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
@@ -120,7 +104,7 @@ exports.update = (req, res) => {
 
 // Delete a Arrival with the specified arrivalId in the request
 exports.delete = (req, res) => {
-  Arrival.remove(req.params.arrivalId, (err, data) => {
+  Model.Arrival.remove(req.params.arrivalId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
