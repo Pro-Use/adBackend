@@ -6,8 +6,8 @@ exports.updateBoard = function() {
     if (err) {
       return "An error occurred while retrieving arrivals.";
     } else {
-        console.log(web_board);
-        io.sockets.emit('new_names', web_board);
+//        console.log(board);
+//        io.sockets.emit('new_names', web_board);
         return board;
     }
   });
