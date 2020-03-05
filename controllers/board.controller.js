@@ -1,13 +1,16 @@
 const Arrival = require("../models/arrival.model.js");
 const io = require('../server').io;
 
-exports.updateBoard = (res) => {
-  return Arrival.newBoard((err, board, web_board) => {
+exports.updateBoard = (req, res) => {
+  Arrival.newBoard((err, board, web_board) => {
     if (err) {
-      console.log ("An error occurred while retrieving arrivals.");
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals."
+      });
     } else {
         console.log(board);
-        return board;
+        res.send(board);
     }
   });
 };
