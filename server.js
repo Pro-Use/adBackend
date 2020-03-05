@@ -6,7 +6,6 @@ const io = require('socket.io').listen(server);
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const cron = require('node-cron');
-const board = require("../controllers/board.controller.js");
 
 module.exports.io = io; 
 
@@ -49,9 +48,10 @@ io.on('connection', function(client) {
 });
 
 // Update board every minute
+const board = require("../controllers/board.controller.js")(app);
 cron.schedule('* * * * *', () => {
   console.log('Board updated');
-    console.log("Result:" + board.updateBoard());
+  console.log("Result:" + board.updateBoard());
 });
 
 // set port, listen for requests
