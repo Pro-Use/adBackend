@@ -7,7 +7,6 @@ exports.updateBoard = (io) => {
       
     } else {
         console.log(board);
-//        const io = require('../server').io;
         io.sockets.emit('new_names', board);
     }
   });
