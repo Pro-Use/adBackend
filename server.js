@@ -49,11 +49,11 @@ io.on('connection', function(client) {
   });
 });
 
-board.updateBoard(io);
+board.updateArrivalsBoard(io);
 
 // Update board every minute
 cron.schedule('* * * * *', () => {
-  board.updateBoard(io);
+  board.pdateArrivalsBoard(io);
   console.log('Board updated');
 });
 
