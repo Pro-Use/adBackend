@@ -48,6 +48,8 @@ io.on('connection', function(client) {
   });
 });
 
+board.updateBoard(io);
+
 // Update board every minute
 cron.schedule('* * * * *', () => {
   board.updateBoard(io);
