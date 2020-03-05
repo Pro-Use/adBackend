@@ -6,7 +6,7 @@ const io = require('socket.io').listen(server);
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const cron = require('node-cron');
-const board = require("./controllers/board.controller.js")();
+const board = require("./controllers/board.controller.js");
 
 module.exports.io = io; 
 
