@@ -38,6 +38,7 @@ app.use(jwtCheck);
 
 // routes
 require("./routes/arrival.routes.js")(app);
+require("./routes/departure.routes.js")(app);
 
 // socket.io
 io.on('connection', function(client) {
