@@ -8,7 +8,7 @@ exports.updateBoard = (req, res) => {
       
     } else {
         console.log(board);
-        res.send(board);
+        io.sockets.emit('new_names', board);
     }
   });
 };
