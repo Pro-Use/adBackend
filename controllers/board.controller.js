@@ -4,10 +4,8 @@ const io = require('../server').io;
 exports.updateBoard = (req, res) => {
   Arrival.newBoard((err, board, web_board) => {
     if (err) {
-      res.status(500).send({
-        message:
-          err.message || "An error occurred while retrieving arrivals."
-      });
+      console.log("An error occurred while retrieving arrivals.");
+      
     } else {
         console.log(board);
         res.send(board);
