@@ -1,4 +1,4 @@
-const Arrival = require("../models/arrival.model.js");
+const Arrival = require("../models/arrivaldeparture.model.js");
 const io = require('../server').io;
 
 // Create and Save a new Arrival
