@@ -48,13 +48,11 @@ io.on('connection', function(client) {
   });
 });
 
-board.updateBoard(io);
-
 // Update board every minute
-cron.schedule('* * * * *', () => {
-  board.updateBoard(io);
-  console.log('Board updated');
-});
+//cron.schedule('* * * * *', () => {
+//  board.updateBoard(io);
+//  console.log('Board updated');
+//});
 
 // set port, listen for requests
 server.listen(44444, () => {
