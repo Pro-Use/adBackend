@@ -6,8 +6,8 @@ exports.updateBoard = (io) => {
       console.log("An error occurred while retrieving arrivals.");
       
     } else {
-        console.log(board);
-        io.sockets.emit('new_names', board);
+        console.log(web_board);
+        io.sockets.emit('new_names', web_board);
     }
   });
 };
