@@ -38,7 +38,8 @@ function executeQuery(sql, callback) {
     });
 }
  
-function query(sql, callback) {    
+function query(sql, callback) { 
+    console.log(callback);
     executeQuery(sql,function(err, data) {
         if(err) {
             return callback(err);
