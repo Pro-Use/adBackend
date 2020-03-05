@@ -86,14 +86,14 @@ Arrival.newBoard = result => {
 //    If there is an undisplayed result, set it to dipslayed
     if (res.length === 1) {
         console.log("Displaying: ", res[0].ID);
-        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", [res[0].ID], 
-          (err, res) => {
-            if (err) {
-              console.log("error: ", err);
-              result(null, err);
-              return;
-            }
-        });
+//        sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", [res[0].ID], 
+//          (err) => {
+//            if (err) {
+//              console.log("error: ", err);
+//              result(null, err);
+//              return;
+//            }
+//        });
 //    Add the new result to existing results and remove oldest one
 //    console.log("old arr: " + arrivals_board.length + ", new arr: " + arrivals_board.unshift(res[0]));
         if (arrivals_board.unshift(res[0]) > 7) {
