@@ -8,7 +8,7 @@ exports.updateBoard = (req, res) => {
       
     } else {
         console.log(board);
-        return board;
+        res.send(board);
     }
   });
 };
