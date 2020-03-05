@@ -87,7 +87,7 @@ Arrival.newBoard = result => {
     if (res.length === 1) {
         console.log("Displaying: ", res[0].ID);
         sql.query( "UPDATE arrivals SET displayed = 1 WHERE id = ?", res[0].ID, 
-          (err) => {
+          (err, res) => {
             if (err) {
               console.log("error: ", err);
               result(null, err);
