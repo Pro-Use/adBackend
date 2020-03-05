@@ -298,3 +298,4 @@ Departure.remove = (id, result) => {
 
 // Module exports
 module.exports.Arrival = Arrival;
+module.exports.Departure = Departure;

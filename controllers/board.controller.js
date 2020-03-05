@@ -1,4 +1,4 @@
-var Model = require("../models/arrivaldeparture.model.js");
+const Model = require("../models/arrivaldeparture.model.js");
 
 exports.updateBoard = (io) => {
   Model.Arrival.newBoard((err, board, web_board) => {
