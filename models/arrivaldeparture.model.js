@@ -6,7 +6,7 @@ var arrivals_web_board = [];
 
 function pad(string, len) {
     if (string.length < len) {
-        string += (''.repeat(len - string.length));    
+        string += (' '.repeat(len - string.length));    
     }
     return string;
 }
