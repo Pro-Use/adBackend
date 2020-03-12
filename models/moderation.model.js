@@ -18,7 +18,7 @@ const Moderate = (name) => {
         codes.forEach(code => {
            var prefix = code.substring(0,2);
            console.log(prefix);
-           if (prefix === "NE") {
+           if (prefix == "NE") {
                errors += 1;
            } else if (prefix === "NS") {
                var success = parseInt(code.substring(2,4));
