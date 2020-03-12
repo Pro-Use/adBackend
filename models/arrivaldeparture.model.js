@@ -4,6 +4,13 @@ const sql = require("./db.js");
 var arrivals_board = [];
 var arrivals_web_board = [];
 
+function pad(string, len) {
+    if (string.length < len) {
+        string += (''.repeat(len - string.length));    
+    }
+    return string;
+}
+
 sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7", 
 (err, res) => {
     if (err) {
@@ -12,6 +19,8 @@ sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7",
     }
     res.forEach(function(item) {
       arrivals_board.push(item);
+      item.date = pad(item.date, 8);
+      item.name = pad(item.name, 24);
       arrivals_web_board.push({'date': item.date, 'name': item.name});
     });
     console.log("arrivals_web_board=", arrivals_web_board);
@@ -29,6 +38,8 @@ sql.query("SELECT * FROM departures WHERE displayed = 1 ORDER BY ID DESC LIMIT 7
     }
     res.forEach(function(item) {
       departures_board.push(item);
+      item.date = pad(item.date, 8);
+      item.name = pad(item.name, 24);
       departures_web_board.push({'date': item.date, 'name': item.name});
     });
     console.log("departures_web_board=", departures_web_board);
@@ -116,7 +127,8 @@ Arrival.newBoard = result => {
             arrivals_board.pop();
             arrivals_web_board.pop();
         };
-        
+        res[0].date = pad(res[0].date, 8);
+        res[0].name = pad(res[0].name, 24);
         arrivals_web_board.unshift({'date': res[0].date, 'name': res[0].name});
     }
      console.log("arrivals web board: ", arrivals_web_board);
@@ -248,7 +260,8 @@ Departure.newBoard = result => {
             departures_board.pop();
             departures_web_board.pop();
         };
-        
+        res[0].date = pad(res[0].date, 8);
+        res[0].name = pad(res[0].name, 24);
         departures_web_board.unshift({'date': res[0].date, 'name': res[0].name});
     }
     console.log("departures web board: ", departures_web_board);
