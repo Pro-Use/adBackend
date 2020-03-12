@@ -262,7 +262,7 @@ Departure.newBoard = result => {
         };
         var padded_date = pad(res[0].date, 8);
         var padded_name = pad(res[0].name, 24);
-        arrivals_web_board.unshift({'date': padded_date, 'name': padded_name});
+        departures_web_board.unshift({'date': padded_date, 'name': padded_name});
     }
     console.log("departures web board: ", departures_web_board);
     result(null, departures_board, departures_web_board);
