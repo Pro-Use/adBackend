@@ -29,7 +29,8 @@ const Moderate = (name) => {
            }  
         });
     });
-    if (errors > 0 ) {
+    console.log("total errors:" + errors)
+    if (errors > 0 || census_matches < name_count) {
         return 0;
     } else {
         return 1;
