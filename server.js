@@ -54,7 +54,8 @@ board.updateArrivalsBoard(io);
 // Update board every minute
 cron.schedule('* * * * *', () => {
   board.updateArrivalsBoard(io);
-  console.log('Board updated');
+  board.updateDeparturesBoard(io);
+  console.log('Boards updated');
 });
 
 // set port, listen for requests
