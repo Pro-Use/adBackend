@@ -9,9 +9,9 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  // Moderate name TODO
-  moderate.Moderate(req.body.name);
-  var moderation_res = 1;
+  // Moderate name
+  
+  var moderation_res = moderate.Moderate(req.body.name);
 
 
   // Create a Arrival
