@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     });
   }
   // Moderate name TODO
-  moderate(req.body.name);
+  moderate.Moderate(req.body.name);
   var moderation_res = 1;
 
 

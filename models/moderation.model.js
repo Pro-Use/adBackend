@@ -1,7 +1,7 @@
 const melissa = require("../config/melissa.config.js");
 const request = require('request');
 
-export const moderate = (name) => {
+const Moderate = (name) => {
     var q_name = name.replace(/ /g, "%20");
     var URL = "https://globalname.melissadata.net/V3/WEB/GlobalName/doGlobalName?";
     var query = "t=1&id=" + melissa.KEY + "&opt=''&comp=''&full=" + q_name + "&format=json";
@@ -18,5 +18,5 @@ export const moderate = (name) => {
     
 };
 
-
+module.exports.Moderate = Moderate;
 
