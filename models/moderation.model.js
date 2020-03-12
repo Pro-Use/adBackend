@@ -1,13 +1,13 @@
 const melissa = require("../config/melissa.config.js");
 const request = require('request');
+var errors = 0;
+var census_matches = 0;
 
 const Moderate = (name) => {
     var q_name = name.replace(/ /g, "%20");
     var name_count = (name.match(/ /g) || []).length;
     var URL = "https://globalname.melissadata.net/V3/WEB/GlobalName/doGlobalName?";
     var query = "t=1&id=" + melissa.KEY + "&opt=''&comp=''&full=" + q_name + "&format=json";
-    var errors = 0;
-    var census_matches = 0;
     request.get(URL + query, (err, res, body) => {
         if(err) {
             console.log(err);
