@@ -1,4 +1,5 @@
 const Model = require("../models/arrivaldeparture.model.js");
+const moderate = require("../models/moderation.model.js");
 
 // Create and Save a new Arrival
 exports.create = (req, res) => {
@@ -9,6 +10,7 @@ exports.create = (req, res) => {
     });
   }
   // Moderate name TODO
+  moderate(req.body.name);
   var moderation_res = 1;
 
 
