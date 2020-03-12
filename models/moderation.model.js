@@ -30,13 +30,13 @@ const Moderate = (name) => {
                }
            }  
         });
+        console.log("total errors:" + errors);
+        if (errors > 0 || census_matches < name_count) {
+            return 0;
+        } else {
+            return 1;
+        }
     });
-    console.log("total errors:" + errors);
-    if (errors > 0 || census_matches < name_count) {
-        return 0;
-    } else {
-        return 1;
-    }
 };
 
 module.exports.Moderate = Moderate;
