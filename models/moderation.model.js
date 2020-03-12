@@ -4,6 +4,8 @@ var errors = 0;
 var census_matches = 0;
 
 const Moderate = (name) => {
+    errors = 0;
+    census_matches = 0;
     var q_name = name.replace(/ /g, "%20");
     var name_count = (name.match(/ /g) || []).length;
     var URL = "https://globalname.melissadata.net/V3/WEB/GlobalName/doGlobalName?";
@@ -28,13 +30,13 @@ const Moderate = (name) => {
                }
            }  
         });
-        console.log("total errors:" + errors);
-        if (errors > 0 || census_matches < name_count) {
-            return 0;
-        } else {
-            return 1;
-        }
     });
+    console.log("total errors:" + errors);
+    if (errors > 0 || census_matches < name_count) {
+        return 0;
+    } else {
+        return 1;
+    }
 };
 
 module.exports.Moderate = Moderate;
