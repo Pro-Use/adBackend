@@ -57,6 +57,7 @@ const Arrival = function(arrival) {
 
 Arrival.create = (newArrival, result) => {
   sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
+    console.log(newArrival);
     if (err) {
       console.log("error: ", err);
       result(err, null);
