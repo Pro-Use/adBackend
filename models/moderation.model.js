@@ -15,9 +15,9 @@ const Moderate = (name) => {
         }
         var results = JSON.parse(body);
         var codes = results["Records"][0]["Results"].split(",");
-        console.log(codes);
         codes.forEach(code => {
            var prefix = code.substring(0,2);
+           console.log(prefix);
            if (prefix === "NE") {
                errors += 1;
            } else if (prefix === "NS") {
