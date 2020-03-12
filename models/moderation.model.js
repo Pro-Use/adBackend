@@ -29,7 +29,7 @@ const Moderate = (name) => {
            }  
         });
     });
-    if (errors > 0 || census_matches < name_count) {
+    if (errors > 0 ) {
         return 0;
     } else {
         return 1;
