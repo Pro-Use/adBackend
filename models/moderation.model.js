@@ -19,6 +19,7 @@ const Moderate = (name) => {
            var prefix = code.substring(0,2).replace(/ /g, "");
            console.log(prefix);
            if (prefix === "NE") {
+               console.log("error, total:" + errors);
                errors += 1;
            } else if (prefix === "NS") {
                var success = parseInt(code.substring(2,4));
