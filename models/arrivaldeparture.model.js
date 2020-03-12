@@ -40,7 +40,7 @@ sql.query("SELECT * FROM departures WHERE displayed = 1 ORDER BY ID DESC LIMIT 7
       departures_board.push(item);
       var padded_date = pad(item.date, 8);
       var padded_name = pad(item.name, 24);
-      arrivals_web_board.push({'date': padded_date, 'name': padded_name});
+      departures_web_board.push({'date': padded_date, 'name': padded_name});
     });
     console.log("departures_web_board=", departures_web_board);
 });
