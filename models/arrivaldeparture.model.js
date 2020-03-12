@@ -63,7 +63,7 @@ Arrival.create = (newArrival, result) => {
       return;
     }
     console.log("created arrival: ", { id: res.insertId, ...newArrival });
-    result(null, { id: res.insertId, ...newArrival });
+    result(null, { moderated: res.moderated });
   });
 };
 
@@ -196,7 +196,7 @@ Departure.create = (newDeparture, result) => {
       return;
     }
     console.log("created departure: ", { id: res.insertId, ...newDeparture });
-    result(null, { id: res.insertId, ...newDeparture });
+    result(null, { moderated: res.moderated });
   });
 };
 
