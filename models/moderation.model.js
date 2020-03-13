@@ -31,11 +31,11 @@ exports.Moderate = (name, result) => {
         });
         console.log("total errors:" + errors);
         if (errors > 0 || census_matches < name_count) {
-            result(0);
-            return;
+            moderated = 0;
         } else {
-            result(1);
+            moderated = 1;
         }
+        result(moderated);
     });
 };
 
