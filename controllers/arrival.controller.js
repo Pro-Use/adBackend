@@ -11,8 +11,7 @@ exports.create = (req, res) => {
   }
   // Moderate name
   
-  var moderation_res = null;
-  moderate.Moderate(req.body.name, moderation_res);
+  moderation_res = moderate.Moderate(req.body.name);
 
 
   // Create a Arrival
