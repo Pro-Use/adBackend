@@ -57,6 +57,11 @@ const Arrival = function(arrival) {
 };
 
 Arrival.create = (newArrival, result) => {
+  
+  function modRes(moderated) {
+      newArrival.moderated = moderated;
+  }
+  
   moderate.Moderate(newArrival.name, (modRes) => {
     if (modRes) {
       console.log(modRes);
