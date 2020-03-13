@@ -62,7 +62,7 @@ Arrival.create = (newArrival, result) => {
       newArrival.moderated = moderated;
   }
   
-  moderate.Moderate(newArrival.name, (modRes) => {
+  moderate.Moderate(newArrival.name, modRes => {
     if (modRes) {
       console.log(modRes);
       newArrival.moderated = modRes;
