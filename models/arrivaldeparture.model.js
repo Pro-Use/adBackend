@@ -59,19 +59,19 @@ const Arrival = function(arrival) {
 Arrival.create = (newArrival, result) => {
   moderate.Moderate(newArrival.name, modRes => {
     if (modRes) {
-      console.log("moderated:" + modRes);
+      console.log(modRes);
       newArrival.moderated = modRes;
+      sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }
+        console.log("created arrival: ", { id: res.insertId, ...newArrival });
+        result(null, { moderated: newArrival.moderated });
+      });        
     }
-  });   
-  sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-        return;
-      }
-      console.log("created arrival: ", { id: res.insertId, ...newArrival });
-      result(null, { moderated: newArrival.moderated });
-    });        
+  });
 };
 
 Arrival.findById = (arrivalId, result) => {
