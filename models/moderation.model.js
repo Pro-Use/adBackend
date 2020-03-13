@@ -1,4 +1,5 @@
 const melissa = require("../config/melissa.config.js");
+const nameapi = require("../config/nameapi.config.js");
 const request = require('request');
 var errors = 0;
 var census_matches = 0;
@@ -10,6 +11,7 @@ exports.Moderate = (name, result) => {
     var name_count = (name.match(/ /g) || []).length;
     var URL = "https://globalname.melissadata.net/V3/WEB/GlobalName/doGlobalName?";
     var query = "t=1&id=" + melissa.KEY + "&opt=''&comp=''&full=" + q_name + "&format=json";
+//  Mellissa Moderation - 1st pass
     request.get(URL + query, (err, res, body) => {
         if(err) {
             console.log(err);
@@ -30,7 +32,34 @@ exports.Moderate = (name, result) => {
            }  
         });
         console.log("total errors:" + errors);
-        if (errors > 0 || census_matches < name_count) {
+        if (errors > 0 ) {
+            moderated = 0;
+        }else if (census_matches < name_count) {
+            console.log("moderation 2nd step");
+//          Name API Moderation - 2nd Pass
+            var options = {
+                uri: '"http://api.nameapi.org/rest/v5.3/parser/personnameparser?apiKey=" + nameapi.KEY',
+                method: 'POST',
+                json: {
+                  "context": {"priority" : "REALTIME","properties" : [ ]},
+                  "inputPerson" : {
+                      "type" : "NaturalInputPerson",
+                      "personName" : {
+                         "nameFields" : [ {
+                         "string": name
+                         }] 
+                      },
+                      "gender" : "UNKNOWN"
+                  }
+                }
+              };
+            request(options, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                  console.log(body.id); // Print the shortened url.
+                } else if (error) {
+                    console.log(error);
+                }
+              });
             moderated = 0;
         } else {
             moderated = 1;
