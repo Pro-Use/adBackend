@@ -8,7 +8,7 @@ exports.Moderate = (name, result) => {
     errors = 0;
     census_matches = 0;
     var q_name = name.replace(/ /g, "%20");
-    var name_count = (name.match(/ /g) || []).length;
+    var name_count = (name.match(/ /g) || []).length + 1;
     var URL = "https://globalname.melissadata.net/V3/WEB/GlobalName/doGlobalName?";
     var query = "t=1&id=" + melissa.KEY + "&opt=''&comp=''&full=" + q_name + "&format=json";
 //  Mellissa Moderation - 1st pass
@@ -32,6 +32,7 @@ exports.Moderate = (name, result) => {
                }
            }  
         });
+        console.log("names: " + name_count);
         console.log("total errors:" + errors);
         console.log("total census matches:" + census_matches);
         if (errors > 0 ) {
