@@ -21,7 +21,7 @@ exports.Moderate = (name, result) => {
         var codes = results["Records"][0]["Results"].split(",");
         codes.forEach(code => {
            var prefix = code.substring(0,2).replace(/ /g, "");
-           console.log(prefix);
+           console.log(code);
            if (prefix === "NE") {
                errors += 1;
            } else if (prefix === "NS") {
@@ -32,6 +32,7 @@ exports.Moderate = (name, result) => {
            }  
         });
         console.log("total errors:" + errors);
+        console.log("total census matches:" + census_matches);
         if (errors > 0 ) {
             moderated = 0;
         }else if (census_matches < name_count) {
