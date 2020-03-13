@@ -12,7 +12,7 @@ function pad(string, len) {
     return string;
 }
 
-sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7", 
+sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
 (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -31,7 +31,7 @@ sql.query("SELECT * FROM arrivals WHERE displayed = 1 ORDER BY ID DESC LIMIT 7",
 var departures_board = [];
 var departures_web_board = [];
 
-sql.query("SELECT * FROM departures WHERE displayed = 1 ORDER BY ID DESC LIMIT 7", 
+sql.query("SELECT * FROM departures WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
 (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -116,7 +116,7 @@ Arrival.getBoard = result => {
 
 Arrival.newBoard = result => {
 //  Get oldest result not yet displayed
-  sql.query("SELECT * FROM arrivals WHERE displayed = 0 LIMIT 1", (err, res) => {
+  sql.query("SELECT * FROM arrivals WHERE displayed = 0 AND moderated = 1 LIMIT 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       return;
@@ -249,7 +249,7 @@ Departure.getBoard = result => {
 
 Departure.newBoard = result => {
 //  Get oldest result not yet displayed
-  sql.query("SELECT * FROM departures WHERE displayed = 0 LIMIT 1", (err, res) => {
+  sql.query("SELECT * FROM departures WHERE displayed = 0 AND moderated = 1 LIMIT 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       return;
