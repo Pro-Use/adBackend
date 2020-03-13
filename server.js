@@ -49,8 +49,6 @@ io.on('connection', function(client) {
   });
 });
 
-board.updateArrivalsBoard(io);
-
 // Update board every minute
 cron.schedule('* * * * *', () => {
   board.updateArrivalsBoard(io);

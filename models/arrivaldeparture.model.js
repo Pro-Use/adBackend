@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const moderate = require("../models/moderation.model.js");
 
 // Build arrival board arrays
 var arrivals_board = [];
@@ -56,14 +57,23 @@ const Arrival = function(arrival) {
 };
 
 Arrival.create = (newArrival, result) => {
-  sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-    console.log("created arrival: ", { id: res.insertId, ...newArrival });
-    result(null, { moderated: newArrival.moderated });
+  
+  function modRes(moderated) {
+      newArrival.moderated = moderated;
+  }
+  
+  moderate.Moderate(newArrival.name, modRes => {
+    console.log(modRes);
+    newArrival.moderated = modRes;
+    sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("created arrival: ", { id: res.insertId, ...newArrival });
+      result(null, { moderated: newArrival.moderated });
+    });        
   });
 };
 

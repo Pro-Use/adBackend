@@ -9,17 +9,13 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  // Moderate name TODO
-  var moderation_res = moderate.Moderate(req.body.name);
-
-
   // Create a Departure
   const departure = new Model.Departure({
     date: req.body.date,
     name: req.body.name,
     geo: req.body.geo,
     email: req.body.email,
-    moderated: moderation_res,
+    moderated: 0,
     displayed: 0
   });
 
