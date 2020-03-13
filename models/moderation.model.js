@@ -41,7 +41,7 @@ exports.Moderate = (name, result) => {
             console.log("moderation 2nd step");
 //          Name API Moderation - 2nd Pass
             var options = {
-                uri: '"http://api.nameapi.org/rest/v5.3/parser/personnameparser?apiKey=" + nameapi.KEY',
+                uri: "http://api.nameapi.org/rest/v5.3/parser/personnameparser?apiKey=" + nameapi.KEY,
                 method: 'POST',
                 json: {
                   "context": {"priority" : "REALTIME","properties" : [ ]},
