@@ -31,7 +31,7 @@ exports.Moderate = (name, result) => {
         });
         console.log("total errors:" + errors);
         if (errors > 0 || census_matches < name_count) {
-            moderated = 2;
+            moderated = 0;
         } else {
             moderated = 1;
         }
