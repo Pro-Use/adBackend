@@ -26,7 +26,7 @@ exports.Moderate = (name, result) => {
                errors += 1;
            } else if (prefix === "NS") {
                var success = parseInt(code.substring(2,4));
-               if (5 <= success <= 8){
+               if (5 <= success && success <= 8){
                    console.log("code is "+ success + " adding to census matches");
                    census_matches += 1;
                }
