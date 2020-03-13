@@ -9,7 +9,7 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  // Moderate name
+  // Moderate name TODO
   var moderation_res = moderate.Moderate(req.body.name);
 
 
