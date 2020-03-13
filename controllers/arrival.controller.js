@@ -1,5 +1,4 @@
 const Model = require("../models/arrivaldeparture.model.js");
-const moderate = require("../models/moderation.model.js");
 
 // Create and Save a new Arrival
 exports.create = (req, res) => {
