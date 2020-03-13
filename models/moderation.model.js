@@ -32,6 +32,7 @@ exports.Moderate = (name, result) => {
         console.log("total errors:" + errors);
         if (errors > 0 || census_matches < name_count) {
             result(0);
+            return;
         } else {
             result(1);
         }
