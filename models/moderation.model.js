@@ -58,15 +58,16 @@ exports.Moderate = (name, result) => {
                 }
               };
             request(options, function (error, response, body) {
-                console.log(body);
                 if (!error && response.statusCode === 200) {
                   console.log(body.matches[0]);
-                  
-                } else if (error) {
-                    console.log(error);
-                }
+                  if (body.matches[0].likeliness < 0.5 ||
+                      body.matches[0].confidence < 0.5 ) {
+                        moderated = 0;
+                  } else {
+                      moderated = 1;
+                  }
+                } moderated = 0;
               });
-            moderated = 0;
         } else {
             moderated = 1;
         }
