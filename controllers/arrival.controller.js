@@ -9,10 +9,6 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  // Moderate name
-  
-  moderation_res = moderate.Moderate(req.body.name);
-
 
   // Create a Arrival
   const arrival = new Model.Arrival({
@@ -20,7 +16,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     geo: req.body.geo,
     email: req.body.email,
-    moderated: moderation_res,
+    moderated: 0,
     displayed: 0
   });
 
