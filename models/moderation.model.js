@@ -57,12 +57,11 @@ exports.Moderate = (name, result) => {
                   }
                 }
               };
-            request(options, function (error, response, body) {
+            request(options, function (error, response, body, moderated) {
                 if (!error && response.statusCode === 200) {
                   console.log(body.matches[0]);
-                  if (body.matches[0].likeliness < 0.5 ||
-                      body.matches[0].confidence < 0.5 ) {
-                        moderated = 0;
+                  if (body.matches[0].likeliness < 0.5 || body.matches[0].confidence < 0.5 ) {
+                      moderated = 0;
                   } else {
                       moderated = 1;
                   }
