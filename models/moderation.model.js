@@ -37,6 +37,7 @@ exports.Moderate = (name, result) => {
         console.log("total census matches:" + census_matches);
         if (errors > 0 ) {
             moderated = 0;
+            result(moderated);
         }else if (census_matches < name_count) {
             console.log("moderation 2nd step");
 //          Name API Moderation - 2nd Pass
@@ -57,20 +58,23 @@ exports.Moderate = (name, result) => {
                   }
                 }
               };
-            request(options, function (error, response, body, moderated) {
+            request(options, function (error, response, body, result) {
                 if (!error && response.statusCode === 200) {
                   console.log(body.matches[0]);
                   if (body.matches[0].likeliness < 0.5 || body.matches[0].confidence < 0.5 ) {
                       moderated = 0;
+                      result(moderated);
                   } else {
                       moderated = 1;
+                      result(moderated);
+                      
                   }
                 } moderated = 0;
               });
         } else {
             moderated = 1;
+            result(moderated);
         }
-        result(moderated);
     });
 };
 
