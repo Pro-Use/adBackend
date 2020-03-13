@@ -37,6 +37,7 @@ const Moderate = (name, result) => {
             result = 1;
         }
     });
+    console.log("total errors:" + errors)
 };
 
 module.exports.Moderate = Moderate;
