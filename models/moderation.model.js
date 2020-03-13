@@ -8,7 +8,8 @@ const Moderate = (name) => {
     var name_count = (name.match(/ /g) || []).length;
     var URL = "https://globalname.melissadata.net/V3/WEB/GlobalName/doGlobalName?";
     var query = "t=1&id=" + melissa.KEY + "&opt=''&comp=''&full=" + q_name + "&format=json";
-    var errors = request.get(URL + query, (err, res, body) => {
+    return request.get(URL + query, (err, res, body) => {
+        var errors = 0
         if(err) {
             console.log(err);
             return;
