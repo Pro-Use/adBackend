@@ -49,7 +49,8 @@ exports.Moderate = (name, result) => {
                       "type" : "NaturalInputPerson",
                       "personName" : {
                          "nameFields" : [ {
-                         "string": name
+                         "string": name,
+                         "fieldType": "FULLNAME"
                          }] 
                       },
                       "gender" : "UNKNOWN"
