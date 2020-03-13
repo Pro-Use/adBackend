@@ -35,6 +35,7 @@ const Moderate = (name, result) => {
         } else {
             result = 1;
         }
+        return;
     });
 };
 
