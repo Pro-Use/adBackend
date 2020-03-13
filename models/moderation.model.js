@@ -57,7 +57,6 @@ exports.Moderate = (name, result) => {
                 }
               };
             request(options, function (error, response, body) {
-                console.log(response);
                 console.log(body);
                 if (!error && response.statusCode === 200) {
                   console.log(body); // Print the shortened url.
