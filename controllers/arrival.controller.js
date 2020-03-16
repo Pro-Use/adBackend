@@ -85,6 +85,7 @@ exports.findOne = (req, res) => {
 
 // Update a Arrival identified by the arrivalId in the request
 exports.update = (req, res) => {
+  console.log("request is:"+req);
   // Validate Request
   if (!req.body) {
     res.status(400).send({
