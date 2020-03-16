@@ -5,10 +5,10 @@ module.exports = app => {
   app.post("/departures", departures.create);
 
   // Retrieve all Departures
-  app.get("/departures", departures.findAll);
+  app.get("/departures", departures.findModerated);
 
-  // Retrieve latest Departures for board
-//  app.get("/departures/board", departures.updateBoard);
+  // Retrieve all Departures
+  app.get("/departures/moderation", departures.findUnmoderated);
   
   // Retrieve current Departures board
   app.get("/departures/webBoard", departures.findBoard);

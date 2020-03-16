@@ -31,8 +31,20 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Arrivals from the database.
-exports.findAll = (req, res) => {
-  Model.Arrival.getAll((err, data) => {
+exports.findModerated = (req, res) => {
+  Model.Arrival.getModerated((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals."
+      });
+    else res.send(data);
+  });
+};
+
+// Retrieve all Arrivals from the database.
+exports.findUnmoderated = (req, res) => {
+  Model.Arrival.getUnmoderated((err, data) => {
     if (err)
       res.status(500).send({
         message:

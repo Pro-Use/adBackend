@@ -5,11 +5,11 @@ module.exports = app => {
   app.post("/arrivals", arrivals.create);
 
   // Retrieve all Arrivals
-  app.get("/arrivals", arrivals.findAll);
+  app.get("/arrivals", arrivals.findModerated);
 
-  // Retrieve latest Arrivals for board
-//  app.get("/arrivals/board", arrivals.updateBoard);
-  
+  // Retrieve all Arrivals to be moderated
+  app.get("/arrivals/moderation", arrivals.findUnmoderated);
+
   // Retrieve current Arrivals board
   app.get("/arrivals/webBoard", arrivals.findBoard);
 

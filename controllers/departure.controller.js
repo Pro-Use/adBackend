@@ -31,8 +31,20 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Departures from the database.
-exports.findAll = (req, res) => {
-  Model.Departure.getAll((err, data) => {
+exports.findModerated = (req, res) => {
+  Model.Departure.getModerated((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving departures."
+      });
+    else res.send(data);
+  });
+};
+
+// Retrieve all Departures from the database.
+exports.findUnmoderated = (req, res) => {
+  Model.Departure.getUnmoderated((err, data) => {
     if (err)
       res.status(500).send({
         message:

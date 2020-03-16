@@ -96,18 +96,32 @@ Arrival.findById = (arrivalId, result) => {
   });
 };
 
-Arrival.getAll = result => {
-  sql.query("SELECT * FROM arrivals", (err, res) => {
+Arrival.getModerated = result => {
+  sql.query("SELECT date, name FROM arrivals WHERE moderated = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("arrivals: ", res);
+    console.log("Moderated arrivals: ", res);
     result(null, res);
   });
 };
+
+Arrival.getUnmoderated = result => {
+  sql.query("SELECT date, name FROM arrivals WHERE moderated = 0", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("Unmoderated arrivals: ", res);
+    result(null, res);
+  });
+};
+
 
 Arrival.getBoard = result => {
     result(null, arrivals_web_board);
@@ -146,10 +160,10 @@ Arrival.newBoard = result => {
   });
 };
 
-Arrival.updateById = (id, arrival, result) => {
+Arrival.updateById = (id, result) => {
   sql.query(
-    "UPDATE arrivals SET email = ?, name = ?, active = ? WHERE id = ?",
-    [arrival.email, arrival.name, arrival.active, id],
+    "UPDATE arrivals SET moderated = 1 WHERE id = ?",
+    [id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -163,8 +177,8 @@ Arrival.updateById = (id, arrival, result) => {
         return;
       }
 
-      console.log("updated arrival: ", { id: id, ...arrival });
-      result(null, { id: id, ...arrival });
+      console.log("updated arrival: ", { id: id});
+      result(null, { id: id});
     }
   );
 };
@@ -229,15 +243,28 @@ Departure.findById = (departureId, result) => {
   });
 };
 
-Departure.getAll = result => {
-  sql.query("SELECT * FROM departures", (err, res) => {
+Departure.getModerated = result => {
+  sql.query("SELECT date, name FROM departures WHERE moderated = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("departures: ", res);
+    console.log("Moderated departures: ", res);
+    result(null, res);
+  });
+};
+
+Departure.getunModerated = result => {
+  sql.query("SELECT date, name FROM departures WHERE moderated = 1", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("Unmoderated departures: ", res);
     result(null, res);
   });
 };
@@ -279,10 +306,10 @@ Departure.newBoard = result => {
   });
 };
 
-Departure.updateById = (id, departure, result) => {
+Departure.updateById = (id, result) => {
   sql.query(
-    "UPDATE departures SET email = ?, name = ?, active = ? WHERE id = ?",
-    [departure.email, departure.name, departure.active, id],
+    "UPDATE departures SET moderated = 1 WHERE id = ?",
+    [id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -296,8 +323,8 @@ Departure.updateById = (id, departure, result) => {
         return;
       }
 
-      console.log("updated departure: ", { id: id, ...departure });
-      result(null, { id: id, ...departure });
+      console.log("updated departure: ", { id: id});
+      result(null, { id: id});
     }
   );
 };
