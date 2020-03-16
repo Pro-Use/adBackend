@@ -112,7 +112,6 @@ exports.update = (req, res) => {
 
 // Delete a Arrival with the specified arrivalId in the request
 exports.delete = (req, res) => {
-  console.log("request is:"+ req.params);
   Model.Arrival.remove(req.params.arrivalId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
