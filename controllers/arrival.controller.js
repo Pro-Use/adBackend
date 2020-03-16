@@ -123,6 +123,6 @@ exports.delete = (req, res) => {
           message: "Could not delete Arrival with id " + req.params.arrivalId
         });
       }
-    } else res.send({ message: `Arrival was deleted successfully!` });
+    } else res.send(data);
   });
 };
