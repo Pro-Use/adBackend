@@ -66,6 +66,19 @@ exports.findBoard = (req, res) => {
   });
 };
 
+// Retrive Map Data
+exports.findMap = (req, res) => {
+  Model.Arrival.getMap((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals map."
+    });   
+    else res.send(data);
+  });
+};
+
+
 // Find a single Arrival with a arrivalId
 exports.findOne = (req, res) => {
   Model.Arrival.findById(req.params.arrivalId, (err, data) => {

@@ -128,6 +128,17 @@ Arrival.getBoard = result => {
     console.log("arrivals web board: ", arrivals_web_board);
 };
 
+Arrival.getMap = result => {
+  sql.query("SELECT geo, date, name FROM arrivals WHERE moderated = 1 AND geo", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    } 
+    result(null, res);
+  });
+};
+
 Arrival.newBoard = result => {
 //  Get oldest result not yet displayed
   sql.query("SELECT * FROM arrivals WHERE displayed = 0 AND moderated = 1 LIMIT 1", (err, res) => {

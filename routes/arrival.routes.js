@@ -12,6 +12,9 @@ module.exports = app => {
 
   // Retrieve current Arrivals board
   app.get("/arrivals/webBoard", arrivals.findBoard);
+  
+  // Retrieve Arrivals Map Data
+  app.get("/arrivals/map", arrivals.findMap);
 
   // Retrieve a single Arrival with arrivalId
   app.get("/arrivals/:arrivalId", arrivals.findOne);
