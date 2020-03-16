@@ -17,7 +17,7 @@ module.exports = app => {
   app.get("/arrivals/:arrivalId", arrivals.findOne);
 
   // Update a Arrival with arrivalId
-  app.put("/arrivals/:arrivalId", arrivals.update);
+  app.get("/arrivals/accept/:arrivalId", arrivals.update);
 
   // Delete a Arrival with arrivalId
   app.delete("/arrivals/:arrivalId", arrivals.delete);
