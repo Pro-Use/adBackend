@@ -196,7 +196,7 @@ Arrival.remove = (arrivalId, result) => {
     }
 
     console.log("deleted arrival with id: ", arrivalId);
-    result(null, res);
+    result(null, { id: arrivalId});
   });
 };
 
@@ -342,7 +342,7 @@ Departure.remove = (departureId, result) => {
     }
 
     console.log("deleted departure with id: ", departureId);
-    result(null, res);
+    result(null, { id: departureId});
   });
 };
 
