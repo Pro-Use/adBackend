@@ -304,9 +304,9 @@ Departure.newBoard = result => {
   });
 };
 
-Departure.updateById = (arrivalId, result) => {
+Departure.updateById = (departureId, result) => {
   sql.query(
-    `UPDATE departures SET moderated = 1 WHERE id = ${arrivalId}`,
+    `UPDATE departures SET moderated = 1 WHERE id = ${departureId}`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -320,14 +320,14 @@ Departure.updateById = (arrivalId, result) => {
         return;
       }
 
-      console.log("updated departure: ", { id: arrivalId});
-      result(null, { id: arrivalId});
+      console.log("updated departure: ", { id: departureId});
+      result(null, { id: departureId});
     }
   );
 };
 
-Departure.remove = (arrivalId, result) => {
-  sql.query(`DELETE FROM departures WHERE id = ${arrivalId}`, (err, res) => {
+Departure.remove = (departureId, result) => {
+  sql.query(`DELETE FROM departures WHERE id = ${departureId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -336,11 +336,12 @@ Departure.remove = (arrivalId, result) => {
 
     if (res.affectedRows === 0) {
       // not found Departure with the id
+      console.log(departureId + " not found" );
       result({ kind: "not_found" }, null);
       return;
     }
 
-    console.log("deleted departure with id: ", arrivalId);
+    console.log("deleted departure with id: ", departureId);
     result(null, res);
   });
 };
