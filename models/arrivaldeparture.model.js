@@ -182,7 +182,7 @@ Arrival.updateById = (arrivalId, result) => {
 };
 
 Arrival.remove = (arrivalId, result) => {
-  sql.query("DELETE FROM arrivals WHERE id = ${arrivalId}", (err, res) => {
+  sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
