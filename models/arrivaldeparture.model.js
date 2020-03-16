@@ -162,7 +162,8 @@ Arrival.newBoard = result => {
 
 Arrival.updateById = (id, result) => {
   sql.query(
-    'UPDATE arrivals SET moderated = 1 WHERE id = ${id}',
+    "UPDATE arrivals SET moderated = 1 WHERE id = ?",
+    [id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
