@@ -283,6 +283,17 @@ Departure.getBoard = result => {
     console.log("departures web board: ", departures_web_board);
 };
 
+Departure.getMap = result => {
+  sql.query("SELECT geo, date, name FROM departures WHERE moderated = 1 AND geo", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    } 
+    result(null, res);
+  });
+};
+
 Departure.newBoard = result => {
 //  Get oldest result not yet displayed
   sql.query("SELECT * FROM departures WHERE displayed = 0 AND moderated = 1 LIMIT 1", (err, res) => {

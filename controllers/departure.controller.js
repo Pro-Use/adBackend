@@ -66,6 +66,17 @@ exports.findBoard = (req, res) => {
   });
 };
 
+exports.findMap = (req, res) => {
+  Model.Departure.getMap((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals map."
+    });   
+    else res.send(data);
+  });
+};
+
 // Find a single Departure with a departureId
 exports.findOne = (req, res) => {
   Model.Departure.findById(req.params.departureId, (err, data) => {
