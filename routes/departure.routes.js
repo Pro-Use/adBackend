@@ -7,7 +7,7 @@ module.exports = app => {
   // Retrieve all Departures
   app.get("/departures", departures.findModerated);
 
-  // Retrieve all Departures
+  // Retrieve all Departures to be moderated
   app.get("/departures/moderation", departures.findUnmoderated);
   
   // Retrieve current Departures board
