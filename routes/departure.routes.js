@@ -14,7 +14,7 @@ module.exports = app => {
   app.get("/departures/webBoard", departures.findBoard);
   
   // Retrieve Departures Map Data
-  app.get("/arrivals/map", departures.findMap);
+  app.get("/departures/map", departures.findMap);
 
   // Retrieve a single Departure with departureId
   app.get("/departures/:departureId", departures.findOne);
