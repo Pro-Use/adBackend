@@ -110,7 +110,7 @@ Arrival.getModerated = result => {
 };
 
 Arrival.getUnmoderated = result => {
-  sql.query("SELECT date, name FROM arrivals WHERE moderated = 0", (err, res) => {
+  sql.query("SELECT ID, date, name FROM arrivals WHERE moderated = 0", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -257,7 +257,7 @@ Departure.getModerated = result => {
 };
 
 Departure.getunModerated = result => {
-  sql.query("SELECT date, name FROM departures WHERE moderated = 1", (err, res) => {
+  sql.query("SELECT ID, date, name FROM departures WHERE moderated = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
