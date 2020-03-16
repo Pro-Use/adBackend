@@ -181,8 +181,8 @@ Arrival.updateById = (arrivalId, result) => {
   );
 };
 
-Arrival.remove = (id, result) => {
-  sql.query("DELETE FROM arrivals WHERE id = ?", id, (err, res) => {
+Arrival.remove = (arrivalId, result) => {
+  sql.query("DELETE FROM arrivals WHERE id = ? = ${arrivalId}", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -195,7 +195,7 @@ Arrival.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted arrival with id: ", id);
+    console.log("deleted arrival with id: ", arrivalId);
     result(null, res);
   });
 };
