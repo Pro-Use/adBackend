@@ -304,10 +304,9 @@ Departure.newBoard = result => {
   });
 };
 
-Departure.updateById = (id, result) => {
+Departure.updateById = (arrivalId, result) => {
   sql.query(
-    "UPDATE departures SET moderated = 1 WHERE id = ?",
-    [id],
+    `UPDATE departures SET moderated = 1 WHERE id = ${arrivalId}`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -321,8 +320,8 @@ Departure.updateById = (id, result) => {
         return;
       }
 
-      console.log("updated departure: ", { id: id});
-      result(null, { id: id});
+      console.log("updated departure: ", { id: arrivalId});
+      result(null, { id: arrivalId});
     }
   );
 };

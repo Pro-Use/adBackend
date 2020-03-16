@@ -94,7 +94,6 @@ exports.update = (req, res) => {
 
   Model.Departure.updateById(
     req.params.departureId,
-    new Model.Departure(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
