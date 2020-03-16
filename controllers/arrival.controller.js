@@ -85,7 +85,7 @@ exports.findOne = (req, res) => {
 
 // Update a Arrival identified by the arrivalId in the request
 exports.update = (req, res) => {
-  console.log("request is:"+req);
+  console.log("request is:"+ req.body);
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -95,7 +95,6 @@ exports.update = (req, res) => {
 
   Model.Arrival.updateById(
     req.params.arrivalId,
-    new Model.Arrival(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
