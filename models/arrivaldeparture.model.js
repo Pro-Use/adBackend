@@ -160,13 +160,11 @@ Arrival.newBoard = result => {
   });
 };
 
-Arrival.updateById = (id, result) => {
+Arrival.updateById = (arrivalId, result) => {
   sql.query(
-    "UPDATE arrivals SET moderated = 1 WHERE id = ?",
-    id,
-    (err, res) => {
+    `UPDATE arrivals SET moderated = 1 WHERE id = ${arrivalId}`,(err, res) => {
       if (err) {
-        console.log("error: ", err);
+       console.log("error: ", err);
         result(null, err);
         return;
       }
@@ -177,8 +175,8 @@ Arrival.updateById = (id, result) => {
         return;
       }
 
-      console.log("updated arrival: ", { id: id});
-      result(null, { id: id});
+      console.log("updated arrival: ", { id: arrivalId});
+      result(null, { id: arrivalId});
     }
   );
 };
