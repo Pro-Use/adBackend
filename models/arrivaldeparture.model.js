@@ -221,15 +221,26 @@ const Departure = function(departure) {
   this.displayed = departure.displayed;
 };
 
+
+
 Departure.create = (newDeparture, result) => {
-  sql.query(["INSERT INTO departures SET ?", newDeparture], (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-    console.log("created departure: ", { id: res.insertId, ...newDeparture });
-    result(null, { moderated: newDeparture.moderated });
+    
+  function modRes(moderated) {
+      newDeparture.moderated = moderated;
+  }
+  
+  moderate.Moderate(newDeparture.name, modRes => {
+    console.log(modRes);
+    newDeparture.moderated = modRes;
+    sql.query(["INSERT INTO departures SET ?", newDeparture], (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("created departure: ", { id: res.insertId, ...newDeparture });
+      result(null, { moderated: newDeparture.moderated });
+    });
   });
 };
 
