@@ -171,6 +171,7 @@ Arrival.newBoard = result => {
     result(null, arrivals_board, arrivals_web_board);
     // If email address present send email
     if (res[0].email) {
+        console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'displayed');
     }
   });
