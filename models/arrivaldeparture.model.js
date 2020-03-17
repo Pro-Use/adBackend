@@ -166,14 +166,14 @@ Arrival.newBoard = result => {
         var padded_date = pad(res[0].date, 8);
         var padded_name = pad(res[0].name, 24);
         arrivals_web_board.unshift({'date': padded_date, 'name': padded_name});
+        if (res[0].email) {
+            console.log("emailing: " + res[0].email);
+            emailer.emailResponse(res[0].email, 'displayed');
+        }
     }
     console.log("arrivals web board: ", arrivals_web_board);
     result(null, arrivals_board, arrivals_web_board);
     // If email address present send email
-    if (res[0].email) {
-        console.log("emailing: " + res[0].email);
-        emailer.emailResponse(res[0].email, 'displayed');
-    }
   });
 };
 
