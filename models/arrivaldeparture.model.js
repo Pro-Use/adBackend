@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 const moderate = require("../models/moderation.model.js");
+const emailer = require("../emailer/emailer.js");
 
 // Build arrival board arrays
 var arrivals_board = [];
@@ -166,8 +167,12 @@ Arrival.newBoard = result => {
         var padded_name = pad(res[0].name, 24);
         arrivals_web_board.unshift({'date': padded_date, 'name': padded_name});
     }
-     console.log("arrivals web board: ", arrivals_web_board);
+    console.log("arrivals web board: ", arrivals_web_board);
     result(null, arrivals_board, arrivals_web_board);
+    // If email address present send email
+    if (res[0].email) {
+        emailer.emailResponse(res[0].email, 'displayed');
+    }
   });
 };
 
