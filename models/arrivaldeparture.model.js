@@ -337,6 +337,10 @@ Departure.newBoard = result => {
         var padded_date = pad(res[0].date, 8);
         var padded_name = pad(res[0].name, 24);
         departures_web_board.unshift({'date': padded_date, 'name': padded_name});
+        if (res[0].email) {
+            console.log("emailing: " + res[0].email);
+            emailer.emailResponse(res[0].email, 'displayed');
+        }
     }
     console.log("departures web board: ", departures_web_board);
     result(null, departures_board, departures_web_board);
