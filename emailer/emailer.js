@@ -4,12 +4,13 @@ const handlebars = require('express-handlebars');
 const path = require('path');
 
 viewEngine = handlebars.create({
+    partialsDir: '../emails/',
     defaultLayout: false
 });
 
 sut = hbs({
     viewEngine: viewEngine,
-    viewPath: '../emails'
+    viewPath: '../emails/'
 });
 
 let transport = nodemailer.createTransport({
