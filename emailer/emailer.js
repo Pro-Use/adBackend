@@ -35,8 +35,8 @@ exports.emailResponse = (add, type) => {
         subject: subject, // Subject line
         template: 'base_email',
         text: msg,
-        main_text: {
-           name: msg
+        context: {
+           main_text: msg
         }
     };
     transport.sendMail(message, function(err, info) {
