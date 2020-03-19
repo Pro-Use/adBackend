@@ -7,7 +7,7 @@ viewEngine = handlebars.create({
     defaultLayout: false
 });
 
-sut = nodemailerExpressHandlebars({
+sut = hbs({
     viewEngine: viewEngine,
     viewPath: '../emails'
 });
