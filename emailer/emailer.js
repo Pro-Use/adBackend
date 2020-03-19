@@ -34,7 +34,7 @@ exports.emailResponse = (add, type) => {
         to: add,         // List of recipients
         subject: subject, // Subject line
         template: 'base_email',
-        context: {
+        main_texts: {
            name: msg
         }
     };
