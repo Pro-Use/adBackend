@@ -211,7 +211,27 @@ Arrival.remove = (arrivalId, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
-
+    arrivals_board.forEach(function(entry) {
+       if (entry['ID'] === arrivalId) {
+        sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
+            (err, res) => {
+                if (err) {
+                  console.log("error: ", err);
+                  return;
+                }
+                var new_arrivals_web_board = [];
+                res.forEach(function(item) {
+                  arrivals_board.push(item);
+                  var padded_date = pad(item.date, 8);
+                  var padded_name = pad(item.name, 24);
+                  new_arrivals_web_board.push({'date': padded_date, 'name': padded_name});
+                });
+                arrivals_web_board = new_arrivals_web_board;
+                console.log("UPDATED arrivals_web_board=", arrivals_web_board);
+        });
+       } 
+    });
+    
     console.log("deleted arrival with id: ", arrivalId);
     result(null, { id: arrivalId});
   });
@@ -383,7 +403,27 @@ Departure.remove = (departureId, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
-
+    departures_board.forEach(function(entry) {
+       if (entry['ID'] === departureId) {
+            sql.query("SELECT * FROM departures WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
+            (err, res) => {
+                if (err) {
+                  console.log("error: ", err);
+                  return;
+                }
+                var new_departures_web_board = [];
+                res.forEach(function(item) {
+                  departures_board.push(item);
+                  var padded_date = pad(item.date, 8);
+                  var padded_name = pad(item.name, 24);
+                  new_departures_web_board.push({'date': padded_date, 'name': padded_name});
+                });
+                departures_web_board = new_departures_web_board;
+                console.log("UPDATED departures_web_board=", departures_web_board);
+            });
+        }
+    });
+    
     console.log("deleted departure with id: ", departureId);
     result(null, { id: departureId});
   });
