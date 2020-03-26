@@ -208,8 +208,8 @@ Arrival.remove = (arrivalId, result) => {
       return;
     }
     arrivals_board.forEach((entry) => {
-       console.log(entry[0].ID);
-       if (entry[0].ID === arrivalId) {
+       console.log('entry:' + entry);
+       if (entry['ID'] === arrivalId) {
         sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
             (err, res) => {
                 if (err) {
