@@ -104,8 +104,6 @@ Arrival.getModerated = result => {
       result(null, err);
       return;
     }
-
-    console.log("Moderated arrivals: ", res);
     result(null, res);
   });
 };
@@ -209,7 +207,8 @@ Arrival.remove = (arrivalId, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
-    arrivals_board.forEach(function(entry) {
+    arrivals_board.forEach((entry) => {
+       console.log(entry);
        if (entry['ID'] === arrivalId) {
         sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
             (err, res) => {
@@ -294,8 +293,6 @@ Departure.getModerated = result => {
       result(null, err);
       return;
     }
-
-    console.log("Moderated departures: ", res);
     result(null, res);
   });
 };
