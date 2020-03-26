@@ -117,8 +117,6 @@ Arrival.getUnmoderated = result => {
       result(null, err);
       return;
     }
-
-    console.log("Unmoderated arrivals: ", res);
     result(null, res);
   });
 };
@@ -309,8 +307,6 @@ Departure.getUnmoderated = result => {
       result(null, err);
       return;
     }
-
-    console.log("Unmoderated departures: ", res);
     result(null, res);
   });
 };
