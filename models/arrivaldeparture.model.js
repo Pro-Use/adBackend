@@ -208,8 +208,7 @@ Arrival.remove = (arrivalId, result) => {
       return;
     }
     arrivals_board.forEach((entry) => {
-       console.log(entry.ID);
-       if (entry['ID'] === arrivalId) {
+       if (entry.ID === arrivalId) {
         sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
             (err, res) => {
                 if (err) {
@@ -398,7 +397,7 @@ Departure.remove = (departureId, result) => {
     }
     departures_board.forEach(function(entry) {
        console.log("Board entry:" + entry[1]);
-       if (entry['ID'] === departureId) {
+       if (entry.ID === departureId) {
             sql.query("SELECT * FROM departures WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
             (err, res) => {
                 if (err) {
