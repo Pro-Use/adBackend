@@ -241,7 +241,12 @@ Arrival.remove = (arrivalId, result) => {
         });
        } 
     });
-    
+    sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
+      if (res[0].email.length > 0) {
+        console.log("emailing: " + res[0].email);
+        emailer.emailResponse(res[0].email, 'remove');
+      }
+    });
     console.log("deleted arrival with id: ", arrivalId);
     result(null, { id: arrivalId});
   });
