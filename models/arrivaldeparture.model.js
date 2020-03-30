@@ -210,45 +210,45 @@ Arrival.updateById = (arrivalId, result) => {
 
 Arrival.remove = (arrivalId, result) => {
   sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
-        if (res[0].email.length > 0) {
-            console.log("emailing: " + res[0].email);
-            emailer.emailResponse(res[0].email, 'remove');
+    if (res[0].email.length > 0) {
+        console.log("emailing: " + res[0].email);
+        emailer.emailResponse(res[0].email, 'remove');
+    }
+    sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
         }
-  });
-  sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
 
-    if (res.affectedRows === 0) {
-      // not found Arrival with the id
-      result({ kind: "not_found" }, null);
-      return;
-    }
-    arrivals_board.forEach((entry) => {
-       if (entry.ID === parseInt(arrivalId)) {
-        sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
-            (err, res) => {
-                if (err) {
-                  console.log("error: ", err);
-                  return;
-                }
-                var new_arrivals_web_board = [];
-                res.forEach(function(item) {
-                  arrivals_board.push(item);
-                  var padded_date = pad(item.date, 8);
-                  var padded_name = pad(item.name, 24);
-                  new_arrivals_web_board.push({'date': padded_date, 'name': padded_name});
-                });
-                arrivals_web_board = new_arrivals_web_board;
-                console.log("UPDATED arrivals_web_board=", arrivals_web_board);
+        if (res.affectedRows === 0) {
+          // not found Arrival with the id
+          result({ kind: "not_found" }, null);
+          return;
+        }
+        arrivals_board.forEach((entry) => {
+           if (entry.ID === parseInt(arrivalId)) {
+            sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
+                (err, res) => {
+                    if (err) {
+                      console.log("error: ", err);
+                      return;
+                    }
+                    var new_arrivals_web_board = [];
+                    res.forEach(function(item) {
+                      arrivals_board.push(item);
+                      var padded_date = pad(item.date, 8);
+                      var padded_name = pad(item.name, 24);
+                      new_arrivals_web_board.push({'date': padded_date, 'name': padded_name});
+                    });
+                    arrivals_web_board = new_arrivals_web_board;
+                    console.log("UPDATED arrivals_web_board=", arrivals_web_board);
+            });
+           } 
         });
-       } 
-    });
-    console.log("deleted arrival with id: ", arrivalId);
-    result(null, { id: arrivalId});
+        console.log("deleted arrival with id: ", arrivalId);
+        result(null, { id: arrivalId});
+      });
   });
 };
 
