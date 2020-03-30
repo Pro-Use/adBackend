@@ -164,7 +164,7 @@ Arrival.newBoard = result => {
         arrivals_web_board.unshift({'date': padded_date, 'name': padded_name});
         if (res[0].email) {
             console.log("emailing: " + res[0].email);
-            emailer.emailResponse(res[0].email, 'displayed');
+            emailer.emailResponse(res[0].email, 'display');
         }
     }
     console.log("arrivals web board: ", arrivals_web_board);
@@ -351,7 +351,7 @@ Departure.newBoard = result => {
         departures_web_board.unshift({'date': padded_date, 'name': padded_name});
         if (res[0].email) {
             console.log("emailing: " + res[0].email);
-            emailer.emailResponse(res[0].email, 'displayed');
+            emailer.emailResponse(res[0].email, 'display');
         }
     }
     console.log("departures web board: ", departures_web_board);
