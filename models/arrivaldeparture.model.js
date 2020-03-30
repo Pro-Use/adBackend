@@ -208,7 +208,6 @@ Arrival.remove = (arrivalId, result) => {
       return;
     }
     arrivals_board.forEach((entry) => {
-       console.log(entry.ID + " == " + arrivalId + ' = ' + (entry.ID === parseInt(arrivalId)));
        if (entry.ID === parseInt(arrivalId)) {
         sql.query("SELECT * FROM arrivals WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
             (err, res) => {
