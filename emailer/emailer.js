@@ -36,16 +36,16 @@ exports.emailResponse = (add, type) => {
             return;
         } 
         var results = JSON.parse(body);
-        var subject = results['subject']['value'];
+        var subject = results['subject'];
         var msg = results['text']['value'];
-        var txt = results['plain_text']['value'];
+        var txt = results['plain_text'];
         console.log('subject:' + subject + '\n msg:' + msg);
         const message = {
             from: 'info@arrivals-departures.com',
             to: add,         // List of recipients
             subject: subject, // Subject line
             template: 'base_email',
-            text: msg,
+            text: txt,
             context: {
                main_text: msg
             }
