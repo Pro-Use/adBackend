@@ -209,6 +209,12 @@ Arrival.updateById = (arrivalId, result) => {
 };
 
 Arrival.remove = (arrivalId, result) => {
+  sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
+        if (res[0].email.length > 0) {
+            console.log("emailing: " + res[0].email);
+            emailer.emailResponse(res[0].email, 'remove');
+        }
+  });
   sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -240,12 +246,6 @@ Arrival.remove = (arrivalId, result) => {
                 console.log("UPDATED arrivals_web_board=", arrivals_web_board);
         });
        } 
-    });
-    sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
-      if (res[0].email.length > 0) {
-        console.log("emailing: " + res[0].email);
-        emailer.emailResponse(res[0].email, 'remove');
-      }
     });
     console.log("deleted arrival with id: ", arrivalId);
     result(null, { id: arrivalId});
