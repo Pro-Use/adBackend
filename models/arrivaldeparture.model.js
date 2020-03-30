@@ -73,6 +73,14 @@ Arrival.create = (newArrival, result) => {
         return;
       }
       console.log("created arrival: ", { id: res.insertId, ...newArrival });
+      if (newArrival.email.length > 0) {
+          console.log("emailing: " + newArrival.email);
+          if (newArrival.moderated === 1){
+            emailer.emailResponse(newArrival.email, 'confirm');
+          } else {
+              emailer.emailResponse(newArrival.email, 'moderate');
+          }
+      }
       result(null, { moderated: newArrival.moderated });
     });        
   });
@@ -261,6 +269,14 @@ Departure.create = (newDeparture, result) => {
         return;
       }
       console.log("created departure: ", { id: res.insertId, ...newDeparture });
+      if (newDeparture.email.length > 0) {
+          console.log("emailing: " + newDeparture.email);
+          if (newDeparture.moderated === 1){
+            emailer.emailResponse(newDeparture.email, 'confirm');
+          } else {
+              emailer.emailResponse(newDeparture.email, 'moderate');
+          }
+      }
       result(null, { moderated: newDeparture.moderated });
     });
   });
