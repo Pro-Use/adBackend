@@ -37,7 +37,7 @@ exports.emailResponse = (add, type) => {
         } 
         var results = JSON.parse(body);
         var subject = results['subject']['value'];
-        var msg = results['subject']['value'];
+        var msg = results['text']['value'];
         console.log('subject:' + subject + '\n msg:' + msg);
         const message = {
             from: 'info@arrivals-departures.com',
