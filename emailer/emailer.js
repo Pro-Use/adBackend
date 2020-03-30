@@ -45,7 +45,7 @@ exports.emailResponse = (add, type) => {
             to: add,         // List of recipients
             subject: subject, // Subject line
             template: 'base_email',
-            text: txt,
+            text: msg,
             context: {
                main_text: msg
             }
