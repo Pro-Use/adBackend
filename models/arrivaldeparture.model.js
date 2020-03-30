@@ -396,7 +396,7 @@ Departure.remove = (departureId, result) => {
       return;
     }
     departures_board.forEach(function(entry) {
-       console.log("Board entry:" + entry.ID + ", Deleted ID:" + departureId + ", detected:" + (entry.ID === departureId));
+       console.log("Board entry:" + typeof(entry.ID) + ", Deleted ID:" + typeof(departureId) + ", detected:" + (entry.ID === departureId));
        if (entry.ID === departureId) {
             sql.query("SELECT * FROM departures WHERE displayed = 1 AND moderated = 1 ORDER BY ID DESC LIMIT 7", 
             (err, res) => {
