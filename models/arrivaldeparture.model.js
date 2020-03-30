@@ -195,6 +195,12 @@ Arrival.updateById = (arrivalId, result) => {
         result({ kind: "not_found" }, null);
         return;
       }
+      sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
+        if (res[0].email.length > 0) {
+          console.log("emailing: " + res[0].email);
+          emailer.emailResponse(res[0].email, 'confirm');
+        }
+      });
 
       console.log("updated arrival: ", { id: arrivalId});
       result(null, { id: arrivalId});
@@ -392,6 +398,7 @@ Departure.updateById = (departureId, result) => {
       }
 
       console.log("updated departure: ", { id: departureId});
+      
       result(null, { id: departureId});
     }
   );
