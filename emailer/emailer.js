@@ -1,30 +1,14 @@
-const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
-const handlebars = require('express-handlebars');
+const Handlebars = require('handlebars');
+const fs = require('fs');
 const path = require('path');
 const request = require('request');
 const emailConfig = require("../config/email.config.js");
+const { SocketLabsClient } = require('@socketlabs/email');
 
-viewEngine = handlebars.create({
-    partialsDir: 'emails/',
-    defaultLayout: false
-});
+const client = new SocketLabsClient(emailConfig.ID, emailConfig.APIKEY);
 
-sut = hbs({
-    viewEngine: viewEngine,
-    viewPath: 'emails/'
-});
-
-let transport = nodemailer.createTransport({
-    host: 'smtp.socketlabs.com',
-    port: 2525,
-    auth: {
-       user: emailConfig.USER,
-       pass: emailConfig.PASSWORD
-    }
-});
-
-transport.use('compile', sut);
+var source = fs.readFileSync('../emails/base_email.handlebars', 'utf8');
+var template = Handlebars.compile(source);
 
 exports.emailResponse = (add, type) => {
     var URL = "http://134.209.184.8/email_text/"+ type;
@@ -41,22 +25,23 @@ exports.emailResponse = (add, type) => {
         var msg = results['text']['value'];
         var txt = results['plain_text'];
         console.log('subject:' + subject + '\n msg:' + msg);
-        const message = {
-            from: 'info@arrivals-departures.com',
-            to: add,         // List of recipients
-            subject: subject, // Subject line
-            template: 'base_email',
-            text: txt,
-            context: {
-               main_text: msg
-            }
+        var message = {
+            to: add,
+            from: "info@arrivalsanddepartures.net",
+            subject: subject,
+            textBody: txt,
+            htmlBody: template({main_text: msg}),
+            messageType: 'basic'
         };
-        transport.sendMail(message, function(err, info) {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log(info);
-            }
-        });  
+        client.send(message).then(
+            (res) => {
+                //Handle successful API call
+                console.log(res);
+            },
+            (err) => {
+                //Handle error making API call
+                console.log(err);
+        });
+ 
     });
 };
