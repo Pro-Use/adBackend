@@ -3,6 +3,7 @@ const hbs = require('nodemailer-express-handlebars');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const request = require('request');
+const emailConfig = require("../config/email.config.js");
 
 viewEngine = handlebars.create({
     partialsDir: 'emails/',
@@ -15,11 +16,11 @@ sut = hbs({
 });
 
 let transport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
+    host: 'smtp.socketlabs.com',
     port: 2525,
     auth: {
-       user: '096a4259ac0f07',
-       pass: 'b7dab3b9d4d65e'
+       user: emailConfig.USER,
+       pass: emailConfig.PASSWORD
     }
 });
 
