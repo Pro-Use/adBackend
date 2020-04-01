@@ -7,8 +7,8 @@ const { SocketLabsClient } = require('@socketlabs/email');
 
 const client = new SocketLabsClient(emailConfig.ID, emailConfig.APIKEY);
 
-//var source = fs.readFileSync('../emails/base_email.handlebars', 'utf8');
-//var template = Handlebars.compile(source);
+var source = fs.readFileSync(path.resolve(__dirname, '../emails/base_email.handlebars'), 'utf8');
+var template = Handlebars.compile(source);
 
 exports.emailResponse = (add, type) => {
     var URL = "http://134.209.184.8/email_text/"+ type;
