@@ -48,8 +48,8 @@ exports.emailResponse = (add, type) => {
 
 exports.emailModeration = (name) => {
     console.log('Sending moderation message for '+name);
-    var msg = 'Hi,<br><br> The name <strong>'+name+'</strong> has been entered and requires moderation. <br>' +
-            'got to <a href="http://www.arrivalsanddepartures.net/moderation">'+
+    var msg = 'Hi,<br><br> The name <strong>"'+name+'"</strong> has been entered and requires moderation. <br>' +
+            'go to <a href="http://www.arrivalsanddepartures.net/moderation">'+
             'http://www.arrivalsanddepartures.net/moderation</a> to manually moderate.' +
             '<br><br>Arrivals + Departures Auto-Moderation';
     var message = {
