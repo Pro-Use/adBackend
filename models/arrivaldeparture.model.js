@@ -73,17 +73,16 @@ Arrival.create = (newArrival, result) => {
         return;
       }
       console.log("created arrival: ", { id: res.insertId, ...newArrival });
-      if (newArrival.email.length > 0) {
+        if (newArrival.moderated === 1 && newArrival.email.length > 0){
           console.log("emailing: " + newArrival.email);
-          if (newArrival.moderated === 1){
-            emailer.emailResponse(newArrival.email, 'confirm');
-          } else {
-              emailer.emailResponse(newArrival.email, 'moderate');
-          }
-      }
-      if (newArrival.moderated === 0){
-          emailer.emailModeration(newArrival.name);
-      }
+          emailer.emailResponse(newArrival.email, 'confirm');
+        } else {
+           if (newArrival.email.length > 0) {
+            console.log("emailing: " + newArrival.email);
+            emailer.emailResponse(newArrival.email, 'moderate');
+            emailer.emailModeration(newArrival.name);
+           }
+        }
       result(null, { moderated: newArrival.moderated });
     });        
   });
