@@ -79,6 +79,7 @@ Arrival.create = (newArrival, result) => {
             emailer.emailResponse(newArrival.email, 'confirm');
           } else {
               emailer.emailResponse(newArrival.email, 'moderate');
+              emailer.emailModeration(newArrival.name);
           }
       }
       result(null, { moderated: newArrival.moderated });

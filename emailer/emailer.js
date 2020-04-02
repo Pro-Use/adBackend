@@ -45,3 +45,26 @@ exports.emailResponse = (add, type) => {
  
     });
 };
+
+exports.emailModeration = (name) => {
+    var msg = 'Hi,<br> The name <strong>'+name+'/<strong> has been entered and requires moderation. <br>' +
+            'got to <a href="http://www.arrivalsanddepartures.net/moderation">'+
+            'http://www.arrivalsanddepartures.net/moderation</a> to manually moderate.';
+    var message = {
+            to: 'arrive2depart@gmail.com',
+            from: "info@arrivalsanddepartures.net",
+            subject: 'A+D: "'+ name + '" needs to be moderated',
+            htmlBody: msg,
+            messageType: 'basic'
+        };
+    client.send(message).then(
+        (res) => {
+            //Handle successful API call
+            console.log(res);
+        },
+        (err) => {
+            //Handle error making API call
+            console.log(err);
+    });
+ 
+};
