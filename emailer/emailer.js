@@ -36,7 +36,8 @@ exports.emailResponse = (add, type) => {
         client.send(message).then(
             (res) => {
                 //Handle successful API call
-                console.log(res);
+//                console.log(res);
+                return;
             },
             (err) => {
                 //Handle error making API call
@@ -62,7 +63,8 @@ exports.emailModeration = (name) => {
     client.send(message).then(
         (res) => {
             //Handle successful API call
-            console.log(res);
+//            console.log(res);
+              return;
         },
         (err) => {
             //Handle error making API call
