@@ -47,14 +47,14 @@ exports.emailResponse = (add, type) => {
 };
 
 exports.emailModeration = (name) => {
-    console.log("emailing moderation for "+name);
-    var msg = 'Hi,<br> The name <strong>'+name+'</strong> has been entered and requires moderation. <br>' +
+    var msg = 'Hi,<br><br> The name <strong>'+name+'</strong> has been entered and requires moderation. <br>' +
             'got to <a href="http://www.arrivalsanddepartures.net/moderation">'+
-            'http://www.arrivalsanddepartures.net/moderation</a> to manually moderate.';
+            'http://www.arrivalsanddepartures.net/moderation</a> to manually moderate.' +
+            '<br><br>Arrivals + Departures Auto-Moderation';
     var message = {
             to: 'arrive2depart@gmail.com',
             from: "info@arrivalsanddepartures.net",
-            subject: 'A+D: "'+ name + '" needs to be moderated',
+            subject: 'Arrivals+Departures: "'+ name + '" needs to be moderated',
             htmlBody: msg,
             messageType: 'basic'
         };
