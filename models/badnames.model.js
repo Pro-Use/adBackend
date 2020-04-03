@@ -1,12 +1,12 @@
 const sql = require("./db.js");
 
 const BadName = function(badname) {
-    this.name = badname.name.toUpperCase();
+    this.name = badname.name;
     this.type = badname.type;
 };
 
 BadName.create = (newBadName, result) => {
-    sql.query(["INSERT INTO names SET ?", newBadName], (err, res) => {
+    sql.query(["INSERT INTO names SET ?", newBadName.toUpperCase()], (err, res) => {
         if (err) {
           console.log("error: ", err);
           if (result) {
@@ -32,15 +32,15 @@ BadName.getBadNames = result => {
     });
 };
 
-BadName.removeBadName = (badNameID, result) => {
-    sql.query(`DELETE FROM names WHERE id = ${badNameID}`, (err, res) => {
+BadName.removeBadName = (badNameId, result) => {
+    sql.query(`DELETE FROM names WHERE id = ${badNameId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
           return;
         }
-        console.log('Removed bad name from database', { id: badNameID});
-        result(null, { id: badNameID});
+        console.log('Removed bad name from database', { id: badNameId});
+        result(null, { id: badNameId});
     });
 };
 
