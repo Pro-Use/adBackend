@@ -213,6 +213,11 @@ Arrival.updateById = (arrivalId, result) => {
 
 Arrival.remove = (arrivalId, result) => {
   sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
+    if (res.length === 0) {
+        console.log("No arrival matching ID:" + arrivalId);
+        result({ kind: "not_found" }, null);
+        return;
+    }
     if (res[0].email.length > 0) {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
