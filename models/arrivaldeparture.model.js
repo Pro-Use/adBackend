@@ -217,12 +217,13 @@ Arrival.remove = (arrivalId, result) => {
         emailer.emailResponse(res[0].email, 'reject');
     }
     var badname = res[0].name.toUpperCase();
-    sql.query(["INSERT INTO names (`name`) VALUES ?", badname], (err, res) => {
+    sql.query(["INSERT INTO names (name, type) VALUES (?,?)", [badname, 'arrival']], (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
           return;
         }
+        console.log(res);
     });
     sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
         if (err) {
