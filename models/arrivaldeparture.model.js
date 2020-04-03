@@ -67,25 +67,34 @@ Arrival.create = (newArrival, result) => {
   moderate.Moderate(newArrival.name, modRes => {
     console.log(modRes);
     newArrival.moderated = modRes;
-    sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-        return;
-      }
-      console.log("created arrival: ", { id: res.insertId, ...newArrival });
-        if (newArrival.moderated === 1 && newArrival.email.length > 0){
-          console.log("emailing: " + newArrival.email);
-          emailer.emailResponse(newArrival.email, 'confirm');
-        } else {
-           if (newArrival.email.length > 0) {
-            console.log("emailing: " + newArrival.email);
-            emailer.emailResponse(newArrival.email, 'moderate');
-            emailer.emailModeration(newArrival.name);
-           }
+    if (newArrival.moderated < 2) {
+      sql.query(["INSERT INTO arrivals SET ?", newArrival], (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
         }
-      result(null, { moderated: newArrival.moderated });
-    });        
+        console.log("created arrival: ", { id: res.insertId, ...newArrival });
+          if (newArrival.moderated === 1 && newArrival.email.length > 0){
+            console.log("emailing: " + newArrival.email);
+            emailer.emailResponse(newArrival.email, 'confirm');
+          } else {
+             if (newArrival.email.length > 0) {
+              console.log("emailing: " + newArrival.email);
+              emailer.emailResponse(newArrival.email, 'moderate');
+              emailer.emailModeration(newArrival.name);
+             }
+          }
+        result(null, { moderated: newArrival.moderated });
+      });     
+    } else {
+        console.log(name + " is in bad names database, rejecting");
+        if (newArrival.email.length > 0) {
+            console.log("emailing: " + newArrival.email);
+            emailer.emailResponse(newArrival.email, 'reject');
+        }
+        result(null, { moderated: 1 });
+    }   
   });
 };
 

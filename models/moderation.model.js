@@ -1,10 +1,20 @@
 const melissa = require("../config/melissa.config.js");
 const nameapi = require("../config/nameapi.config.js");
 const request = require('request');
+const sql = require("./db.js");
+
 var errors = 0;
 var census_matches = 0;
 
 exports.Moderate = (name, result) => {
+    sql.query(`SELECT * FROM names WHERE id = ${name.toUpperCase()}`, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+        } else if (res.length) {
+          result(2);
+          return;
+        }
+    });
     errors = 0;
     census_matches = 0;
     var q_name = name.replace(/ /g, "%20");
