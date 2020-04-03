@@ -7,7 +7,7 @@ var errors = 0;
 var census_matches = 0;
 
 exports.Moderate = (name, result) => {
-    sql.query(`SELECT * FROM names WHERE id = "${name.toUpperCase()}"`, (err, res) => {
+    sql.query(`SELECT * FROM names WHERE name = "${name.toUpperCase()}"`, (err, res) => {
         console.log("name check: "+res);
         if (err) {
           console.log("error: ", err);
