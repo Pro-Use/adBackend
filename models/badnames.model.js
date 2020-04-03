@@ -32,7 +32,7 @@ BadName.getBadNames = result => {
     });
 };
 
-BadName.removeBadName = (badNameId, result) => {
+BadName.remove = (badNameId, result) => {
     sql.query(`DELETE FROM names WHERE id = ${badNameId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
