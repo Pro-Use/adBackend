@@ -6,7 +6,7 @@ const BadName = function(badname) {
 };
 
 BadName.create = (newBadName, result) => {
-    sql.query(["INSERT INTO names SET ?", newBadName.toUpperCase()], (err, res) => {
+    sql.query(["INSERT INTO names SET ?", newBadName], (err, res) => {
         if (err) {
           console.log("error: ", err);
           if (result) {
