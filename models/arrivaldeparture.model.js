@@ -223,7 +223,6 @@ Arrival.remove = (arrivalId, result) => {
           result(null, err);
           return;
         }
-        console.log(res);
     });
     sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
         if (err) {
@@ -432,6 +431,14 @@ Departure.remove = (departureId, result) => {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
+    var badname = res[0].name.toUpperCase();
+    sql.query(["INSERT INTO names (name, type) VALUES (?,?)", [badname, 'departure']], (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+        }
+    });
     sql.query(`DELETE FROM departures WHERE id = ${departureId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
