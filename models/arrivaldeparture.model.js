@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 const moderate = require("../models/moderation.model.js");
+const badname = require("../models/badnames.model");
 const emailer = require("../emailer/emailer.js");
 
 // Build arrival board arrays
@@ -216,21 +217,13 @@ Arrival.remove = (arrivalId, result) => {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
-    var badname = res[0].name.toUpperCase();
-    sql.query(["INSERT INTO names (name, type) VALUES (?,?)", [badname, 'arrival']], (err, res) => {
-        if (err) {
-          console.log("error: ", err);
-          result(null, err);
-          return;
-        }
-    });
+    badname.BadName.create({name:res[0].name, type:'arrival'}, null);
     sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
           return;
         }
-
         if (res.affectedRows === 0) {
           // not found Arrival with the id
           result({ kind: "not_found" }, null);
