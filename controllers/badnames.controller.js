@@ -11,7 +11,7 @@ exports.create = (req, res) => {
 
   // Create a bad name entry
   const badname = new Model.BadName({
-    name: req.body.name,
+    name: req.body.name.toUpperCase(),
     type: req.body.type
   });
 
