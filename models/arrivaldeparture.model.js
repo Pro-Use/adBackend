@@ -222,7 +222,7 @@ Arrival.remove = (arrivalId, result) => {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
-    badname.BadName.create({name:res[0].name, type:'arrival'}, null);
+    badname.BadName.create({name:res[0].name.toUpperCase(), type:'arrival'}, null);
     sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -429,14 +429,7 @@ Departure.remove = (departureId, result) => {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
-    var badname = res[0].name.toUpperCase();
-    sql.query(["INSERT INTO names (name, type) VALUES (?,?)", [badname, 'departure']], (err, res) => {
-        if (err) {
-          console.log("error: ", err);
-          result(null, err);
-          return;
-        }
-    });
+    badname.BadName.create({name:res[0].name.toUpperCase(), type:'departure'}, null);
     sql.query(`DELETE FROM departures WHERE id = ${departureId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
