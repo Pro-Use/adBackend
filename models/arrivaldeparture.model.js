@@ -222,7 +222,8 @@ Arrival.remove = (arrivalId, result) => {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
-    badname.BadName.create({name:res[0].name.toUpperCase(), type:'arrival'}, null);
+    newbadname = res[0].name.toUpperCase();
+    badname.BadName.create({name:newbadname, type:'arrival'}, null);
     sql.query(`DELETE FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
