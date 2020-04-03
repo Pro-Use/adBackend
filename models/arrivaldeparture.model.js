@@ -88,7 +88,7 @@ Arrival.create = (newArrival, result) => {
         result(null, { moderated: newArrival.moderated });
       });     
     } else {
-        console.log(name + " is in bad names database, rejecting");
+        console.log(newArrival.name + " is in bad names database, rejecting");
         if (newArrival.email.length > 0) {
             console.log("emailing: " + newArrival.email);
             emailer.emailResponse(newArrival.email, 'reject');
