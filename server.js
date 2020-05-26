@@ -24,20 +24,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Arrivals Departures 0.1" });
 });
 
-//secure all routes with OAuth
-var jwtCheck = jwt({
-      secret: jwks.expressJwtSecret({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: 'https://arr-dep.eu.auth0.com/.well-known/jwks.json'
-    }),
-    audience: 'arrivals-departures',
-    issuer: 'https://arr-dep.eu.auth0.com/',
-    algorithms: ['RS256']
-});
-
-app.use(jwtCheck);
+// filter IP
 app.use(ipfilter(ips, { mode: 'allow' }));
 
 // routes
