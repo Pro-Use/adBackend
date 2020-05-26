@@ -35,9 +35,8 @@ if (app.get('env') === 'development') {
       res.status(err.status || 500);
     }
  
-    res.render('error', {
-      message: 'You shall not pass',
-      error: err
+    res.status(400).send({
+      message: "Unauthorised Access"
     });
   });
 }
