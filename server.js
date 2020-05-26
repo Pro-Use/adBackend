@@ -4,6 +4,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const ipfilter = require('express-ipfilter').IpFilter;
+const IpDeniedError = require('express-ipfilter').IpDeniedError;
 const cron = require('node-cron');
 const board = require("./controllers/board.controller.js");
 
@@ -24,6 +25,22 @@ app.get("/", (req, res) => {
 
 // filter IP
 app.use(ipfilter(ips, { mode: 'allow' }));
+
+if (app.get('env') === 'development') {
+  app.use((err, req, res, _next) => {
+    console.log('Error handler', err);
+    if (err instanceof IpDeniedError) {
+      res.status(401);
+    } else {
+      res.status(err.status || 500);
+    }
+ 
+    res.render('error', {
+      message: 'You shall not pass',
+      error: err
+    });
+  });
+}
 
 // routes
 require("./routes/arrival.routes.js")(app);
