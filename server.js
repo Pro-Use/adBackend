@@ -9,7 +9,7 @@ const ipfilter = require('express-ipfilter').IpFilter;
 const cron = require('node-cron');
 const board = require("./controllers/board.controller.js");
 
-const ips = ['127.0.0.1', '0.0.0.0', '134.209.184.8'];
+const ips = ['127.0.0.1', '0.0.0.0', '::ffff:134.209.184.8'];
 
 module.exports.io = io; 
 
