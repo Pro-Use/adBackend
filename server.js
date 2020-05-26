@@ -5,8 +5,11 @@ const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const ipfilter = require('express-ipfilter').IpFilter;
 const cron = require('node-cron');
 const board = require("./controllers/board.controller.js");
+
+const ips = ['127.0.0.1', '0.0.0.0', '134.209.184.8'];
 
 module.exports.io = io; 
 
@@ -35,6 +38,7 @@ var jwtCheck = jwt({
 });
 
 app.use(jwtCheck);
+app.use(ipfilter(ips, { mode: 'allow' }));
 
 // routes
 require("./routes/arrival.routes.js")(app);
