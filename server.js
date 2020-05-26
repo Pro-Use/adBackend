@@ -28,7 +28,7 @@ app.use(ipfilter(ips, { mode: 'allow' }));
 
 if (app.get('env') === 'development') {
   app.use((err, req, res, _next) => {
-    console.log('Error handler', err);
+//    console.log('Error handler', err);
     if (err instanceof IpDeniedError) {
       res.status(401);
     } else {
