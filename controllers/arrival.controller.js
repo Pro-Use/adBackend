@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     moderated: 0,
     displayed: 0
   });
-
+  console.log("IP for new arrival: " + req.ip);
   // Save Arrival in the database
   Model.Arrival.create(arrival, (err, data) => {
     if (err)
