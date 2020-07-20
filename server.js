@@ -24,22 +24,22 @@ app.get("/", (req, res) => {
 });
 
 // filter IP
-//app.use(ipfilter(ips, { mode: 'allow' }));
-//
-//if (app.get('env') === 'development') {
-//  app.use((err, req, res, _next) => {
-////    console.log('Error handler', err);
-//    if (err instanceof IpDeniedError) {
-//      res.status(401);
-//    } else {
-//      res.status(err.status || 500);
-//    }
-// 
-//    res.status(400).send({
-//      message: "Unauthorised Access"
-//    });
-//  });
-//}
+app.use(ipfilter(ips, { mode: 'allow' }));
+
+if (app.get('env') === 'development') {
+  app.use((err, req, res, _next) => {
+    console.log('Error handler', err);
+    if (err instanceof IpDeniedError) {
+      res.status(401);
+    } else {
+      res.status(err.status || 500);
+    }
+ 
+    res.status(400).send({
+      message: "Unauthorised Access"
+    });
+  });
+}
 
 // routes
 require("./routes/arrival.routes.js")(app);
