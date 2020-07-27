@@ -33,6 +33,9 @@ module.exports = app => {
 
   // Delete a Departure with departureId
   app.delete("/departures/:departureId", departures.delete);
+  
+  // Delete a Departure story with departureId
+  app.delete("/departures/stories/:departureId", departures.deleteStory);
 
 };
 

@@ -264,6 +264,27 @@ Arrival.updateStoryById = (arrivalId, result) => {
   );
 };
 
+Arrival.removeStory = (arrivalId, result) => {
+  sql.query(
+    `UPDATE arrivals SET story = NULL WHERE id = ${arrivalId}`,(err, res) => {
+      if (err) {
+       console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows === 0) {
+        // not found Arrival with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("deleted arrival story: ", { id: arrivalId});
+      result(null, { id: arrivalId});
+    }
+  );
+};
+
 Arrival.remove = (arrivalId, result) => {
   sql.query(`SELECT * FROM arrivals WHERE id = ${arrivalId}`, (err, res) => {
     if (res.length === 0) {
@@ -516,6 +537,28 @@ Departure.updateStoryById = (departureId, result) => {
         return;
       }
       console.log("accepted departure story: ", { id: departureId});
+      
+      result(null, { id: departureId});
+    }
+  );
+};
+
+Departure.removeStory = (departureId, result) => {
+  sql.query(
+    `UPDATE departures SET story = Null WHERE id = ${departureId}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows === 0) {
+        // not found Departure with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+      console.log("Deleted departure story: ", { id: departureId});
       
       result(null, { id: departureId});
     }

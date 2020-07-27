@@ -192,3 +192,20 @@ exports.delete = (req, res) => {
     } else res.send(data);
   });
 };
+
+// Delete a Arrival with the specified arrivalId in the request
+exports.deleteStory = (req, res) => {
+  Model.Arrival.removeStory(req.params.arrivalId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Arrival with id ${req.params.arrivalId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not delete Arrival with id " + req.params.arrivalId
+        });
+      }
+    } else res.send(data);
+  });
+};
