@@ -153,7 +153,7 @@ Arrival.getUnmoderated = result => {
 };
 
 Arrival.getUnmoderatedStory = result => {
-  sql.query("SELECT ID, date, name, story FROM arrivals WHERE story_mod = 0 AND story IS NOT NULL", (err, res) => {
+  sql.query("SELECT ID, date, name, story FROM arrivals WHERE story_mod = 0 AND story", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
