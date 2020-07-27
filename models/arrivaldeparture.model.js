@@ -153,7 +153,7 @@ Arrival.getUnmoderated = result => {
 };
 
 Arrival.getUnmoderatedStory = result => {
-  sql.query("SELECT ID, date, name, story FROM arrivals WHERE story_mod = 0", (err, res) => {
+  sql.query("SELECT ID, date, name, story FROM arrivals WHERE story_mod = 0 AND story", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -388,7 +388,7 @@ Departure.getUnmoderated = result => {
 };
 
 Departure.getUnmoderatedStory = result => {
-  sql.query("SELECT ID, date, name, story FROM departures WHERE story_mod = 0", (err, res) => {
+  sql.query("SELECT ID, date, name, story FROM departures WHERE story_mod = 0 AND story", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
