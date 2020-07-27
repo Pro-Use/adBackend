@@ -10,9 +10,9 @@ exports.create = (req, res) => {
   }
   
   if (!req.body.story) {
-      let story = "";
+      var story = "";
   } else {
-      let story = req.body.story;
+      var story = req.body.story;
   }
 
   // Create a Arrival
