@@ -9,12 +9,6 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  
-  if (!req.body.story) {
-      let story = "";
-  } else {
-      let story = req.body.story;
-  }
 
   // Create a Departure
   const departure = new Model.Departure({
@@ -24,7 +18,7 @@ exports.create = (req, res) => {
     email: req.body.email,
     moderated: 0,
     displayed: 0,
-    story: story,
+    story: req.body.story,
     story_mod: 0
   });
 

@@ -8,12 +8,6 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  
-  if (!req.body.story) {
-      var story = "";
-  } else {
-      var story = req.body.story;
-  }
 
   // Create a Arrival
   const arrival = new Model.Arrival({
@@ -23,7 +17,7 @@ exports.create = (req, res) => {
     email: req.body.email,
     moderated: 0,
     displayed: 0,
-    story: story,
+    story: req.body.story,
     story_mod: 0
   });
   console.log("IP for new arrival: " + req.ip);
