@@ -9,6 +9,13 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
+  
+  if (!req.body.story) {
+      let story = "";
+  } else {
+      let story = req.body.story;
+  }
+
   // Create a Departure
   const departure = new Model.Departure({
     date: req.body.date,
@@ -16,7 +23,9 @@ exports.create = (req, res) => {
     geo: req.body.geo,
     email: req.body.email,
     moderated: 0,
-    displayed: 0
+    displayed: 0,
+    story: story,
+    story_mod: 0
   });
 
   // Save Departure in the database
@@ -42,9 +51,33 @@ exports.findModerated = (req, res) => {
   });
 };
 
-// Retrieve all Departures from the database.
+// Retrieve all Departure stories from the database.
+exports.findModeratedStory = (req, res) => {
+  Model.Departure.getModeratedStory((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving departures."
+      });
+    else res.send(data);
+  });
+};
+
+// Retrieve all Unmoderated Departures from the database.
 exports.findUnmoderated = (req, res) => {
   Model.Departure.getUnmoderated((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving departures."
+      });
+    else res.send(data);
+  });
+};
+
+// Retrieve all Unmoderated Departures Stories from the database.
+exports.findUnmoderatedStory = (req, res) => {
+  Model.Departure.getUnmoderatedStory((err, data) => {
     if (err)
       res.status(500).send({
         message:

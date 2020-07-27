@@ -6,9 +6,15 @@ module.exports = app => {
 
   // Retrieve all Departures
   app.get("/departures", departures.findModerated);
+  
+  // Retrieve all Departure stories
+  app.get("/departures/stories", departures.findModeratedStory);
 
   // Retrieve all Departures to be moderated
   app.get("/departures/moderation", departures.findUnmoderated);
+  
+  // Retrieve all Departure stories to be moderated
+  app.get("/departures/story_mod", departures.findUnmoderatedStory);
   
   // Retrieve current Departures board
   app.get("/departures/webBoard", departures.findBoard);

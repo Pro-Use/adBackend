@@ -56,6 +56,8 @@ const Arrival = function(arrival) {
   this.email = arrival.email;
   this.moderated = arrival.moderated;
   this.displayed = arrival.displayed;
+  this.story = arrival.story;
+  this.story_mod = arrival.story_mod;
 };
 
 Arrival.create = (newArrival, result) => {
@@ -118,7 +120,18 @@ Arrival.findById = (arrivalId, result) => {
 };
 
 Arrival.getModerated = result => {
-  sql.query("SELECT ID, date, name FROM arrivals WHERE moderated = 1", (err, res) => {
+  sql.query("SELECT ID, date, name, story_mod FROM arrivals WHERE moderated = 1", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+};
+
+Arrival.getModeratedStory = result => {
+  sql.query("SELECT ID, date, name, story FROM arrivals WHERE moderated = 1 AND story_mod = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -139,6 +152,16 @@ Arrival.getUnmoderated = result => {
   });
 };
 
+Arrival.getUnmoderatedStory = result => {
+  sql.query("SELECT ID, date, name, story FROM arrivals WHERE story_mod = 0", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+};
 
 Arrival.getBoard = result => {
     result(null, arrivals_web_board);
@@ -146,7 +169,7 @@ Arrival.getBoard = result => {
 };
 
 Arrival.getMap = result => {
-  sql.query("SELECT geo, date, name FROM arrivals WHERE moderated = 1 AND geo", (err, res) => {
+  sql.query("SELECT ID, geo, date, name, story_mod FROM arrivals WHERE moderated = 1 AND geo", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -277,6 +300,8 @@ const Departure = function(departure) {
   this.email = departure.email;
   this.moderated = departure.moderated;
   this.displayed = departure.displayed;
+  this.story = departure.story;
+  this.story_mod = departure.story_mod;
 };
 
 
@@ -330,7 +355,18 @@ Departure.findById = (departureId, result) => {
 };
 
 Departure.getModerated = result => {
-  sql.query("SELECT ID, date, name FROM departures WHERE moderated = 1", (err, res) => {
+  sql.query("SELECT ID, date, name, story_mod FROM departures WHERE moderated = 1", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+};
+
+Departure.getModeratedStory = result => {
+  sql.query("SELECT ID, date, name, story FROM departures WHERE moderated = 1 AND story_mod = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -351,13 +387,24 @@ Departure.getUnmoderated = result => {
   });
 };
 
+Departure.getUnmoderatedStory = result => {
+  sql.query("SELECT ID, date, name, story FROM departures WHERE story_mod = 0", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+};
+
 Departure.getBoard = result => {
     result(null, departures_web_board);
     console.log("departures web board: ", departures_web_board);
 };
 
 Departure.getMap = result => {
-  sql.query("SELECT geo, date, name FROM departures WHERE moderated = 1 AND geo", (err, res) => {
+  sql.query("SELECT ID, geo, date, name, story_mod FROM departures WHERE moderated = 1 AND geo", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

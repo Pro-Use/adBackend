@@ -8,6 +8,12 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
+  
+  if (!req.body.story) {
+      let story = "";
+  } else {
+      let story = req.body.story;
+  }
 
   // Create a Arrival
   const arrival = new Model.Arrival({
@@ -16,7 +22,9 @@ exports.create = (req, res) => {
     geo: req.body.geo,
     email: req.body.email,
     moderated: 0,
-    displayed: 0
+    displayed: 0,
+    story: story,
+    story_mod: 0
   });
   console.log("IP for new arrival: " + req.ip);
   // Save Arrival in the database
@@ -42,9 +50,33 @@ exports.findModerated = (req, res) => {
   });
 };
 
-// Retrieve all Arrivals from the database.
+// Retrieve all Arrival stories from the database.
+exports.findModeratedStory = (req, res) => {
+  Model.Arrival.getModeratedStory((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals."
+      });
+    else res.send(data);
+  });
+};
+
+// Retrieve all Unmoderated Arrivals from the database.
 exports.findUnmoderated = (req, res) => {
   Model.Arrival.getUnmoderated((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "An error occurred while retrieving arrivals."
+      });
+    else res.send(data);
+  });
+};
+
+// Retrieve all Unmoderated Arrivals Stories from the database.
+exports.findUnmoderatedStory = (req, res) => {
+  Model.Arrival.getUnmoderatedStory((err, data) => {
     if (err)
       res.status(500).send({
         message:

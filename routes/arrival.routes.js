@@ -6,9 +6,15 @@ module.exports = app => {
 
   // Retrieve all Arrivals
   app.get("/arrivals", arrivals.findModerated);
+  
+  // Retrieve all Arrival stories
+  app.get("/arrivals/stories", arrivals.findModeratedStory);
 
   // Retrieve all Arrivals to be moderated
   app.get("/arrivals/moderation", arrivals.findUnmoderated);
+  
+  // Retrieve all Arrival stories to be moderated
+  app.get("/arrivals/story_mod", arrivals.findUnmoderatedStory);
 
   // Retrieve current Arrivals board
   app.get("/arrivals/webBoard", arrivals.findBoard);
