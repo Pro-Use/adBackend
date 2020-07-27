@@ -148,6 +148,33 @@ exports.update = (req, res) => {
   );
 };
 
+// Update a Departure identified by the departureId in the request
+exports.updateStory = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content cannot be empty!"
+    });
+  }
+
+  Model.Departure.updateStoryById(
+    req.params.departureId,
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Departure with id ${req.params.departureId}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating Departure with id " + req.params.departureId
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
+
 // Delete a Departure with the specified departureId in the request
 exports.delete = (req, res) => {
   Model.Departure.remove(req.params.departureId, (err, data) => {

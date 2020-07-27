@@ -27,6 +27,9 @@ module.exports = app => {
 
   // Update a Departure with departureId
   app.get("/departures/accept/:departureId", departures.update);
+  
+  // Update a Departure with departureId
+  app.get("/departures/accept_story/:departureId", departures.updateStory);
 
   // Delete a Departure with departureId
   app.delete("/departures/:departureId", departures.delete);
