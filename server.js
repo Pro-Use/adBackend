@@ -3,10 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-//const options = {
-//    key: fs.readFile(`/etc/letsencrypt/live/arrivalsanddepartures.net/privkey.pem`),
-//    cert: fs.readFile(`/etc/letsencrypt/live/arrivalsanddepartures.net/fullchain.pem`)
-//};
+const options = {
+    key: fs.readFile(`/etc/letsencrypt/live/arrivalsanddepartures.net/privkey.pem`),
+    cert: fs.readFile(`/etc/letsencrypt/live/arrivalsanddepartures.net/fullchain.pem`)
+};
 
 //const server = require('http').createServer(options, app);
 const server = require('http').createServer(app);
