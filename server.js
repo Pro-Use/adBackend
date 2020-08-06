@@ -1,19 +1,15 @@
-const fs = require("mz/fs");
+const fs = require("fs");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-//const {key, cert} = await (async () => {
-//	const certdir = "arrivalsanddepartures.net";
-//
-//	return {
-//		key: await fs.readFile(`/etc/letsencrypt/live/${certdir}/privkey.pem`),
-//		cert: await fs.readFile(`/etc/letsencrypt/live/${certdir}/fullchain.pem`)
-//	};
-//})();
+const options = {
+    key: fs.readFile(`/etc/letsencrypt/live/arrivalsanddepartures.net/privkey.pem`),
+    cert: fs.readFile(`/etc/letsencrypt/live/arrivalsanddepartures.net/fullchain.pem`)
+};
 
-//const server = require('http').createServer({key, cert}, app);
-const server = require('http').createServer(app);
+const server = require('http').createServer(options, app);
+//const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const ipfilter = require('express-ipfilter').IpFilter;
 const IpDeniedError = require('express-ipfilter').IpDeniedError;
