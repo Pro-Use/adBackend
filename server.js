@@ -3,17 +3,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-const {key, cert} = await (async () => {
-	const certdir = "arrivalsanddepartures.net";
+//const {key, cert} = await (async () => {
+//	const certdir = "arrivalsanddepartures.net";
+//
+//	return {
+//		key: await fs.readFile(`/etc/letsencrypt/live/${certdir}/privkey.pem`),
+//		cert: await fs.readFile(`/etc/letsencrypt/live/${certdir}/fullchain.pem`)
+//	};
+//})();
 
-	return {
-		key: await fs.readFile(`/etc/letsencrypt/live/${certdir}/privkey.pem`),
-		cert: await fs.readFile(`/etc/letsencrypt/live/${certdir}/fullchain.pem`)
-	};
-})();
-
-const server = require('http').createServer({key, cert}, app);
-//const server = require('http').createServer(app);
+//const server = require('http').createServer({key, cert}, app);
+const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const ipfilter = require('express-ipfilter').IpFilter;
 const IpDeniedError = require('express-ipfilter').IpDeniedError;
