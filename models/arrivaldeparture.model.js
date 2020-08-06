@@ -292,7 +292,7 @@ Arrival.remove = (arrivalId, result) => {
         result({ kind: "not_found" }, null);
         return;
     }
-    if (res[0].email.length > 0) {
+    if (res[0].email.length > 0 && res[0].moderated === 0) {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
@@ -567,7 +567,7 @@ Departure.removeStory = (departureId, result) => {
 
 Departure.remove = (departureId, result) => {
   sql.query(`SELECT * FROM departures WHERE id = ${departureId}`, (err, res) => {
-    if (res[0].email.length > 0) {
+    if (res[0].email.length > 0 && res[0].moderated === 0) {
         console.log("emailing: " + res[0].email);
         emailer.emailResponse(res[0].email, 'reject');
     }
