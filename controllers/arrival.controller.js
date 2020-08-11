@@ -46,6 +46,7 @@ exports.findModerated = (req, res) => {
 
 // Retrieve all Arrival stories from the database.
 exports.findModeratedStory = (req, res) => {
+  console.log("page="+req.params.page);
   if (!req.params.page){
       req.params.page = 0;
   }
