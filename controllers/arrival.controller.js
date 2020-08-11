@@ -34,11 +34,11 @@ exports.create = (req, res) => {
 
 // Retrieve all Arrivals from the database.
 exports.findModerated = (req, res) => {
-  console.log("page="+req.params.page);
-  if (!req.params.page){
-      req.params.page = 0;
+  console.log("page="+req.params.page_num);
+  if (!req.params.page_num){
+      req.params.page_num = 0;
   }
-  Model.Arrival.getModerated(req.params.page,(err, data) => {
+  Model.Arrival.getModerated(req.params.page_num,(err, data) => {
     if (err)
       res.status(500).send({
         message:
