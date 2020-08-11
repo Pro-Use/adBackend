@@ -126,6 +126,7 @@ Arrival.getModerated = (page, result) => {
       result(null, err);
       return;
     }
+    console.log("Getting arrivals archive page "+ page);
     result(null, res);
   });
 };
