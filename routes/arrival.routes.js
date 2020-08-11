@@ -6,6 +6,7 @@ module.exports = app => {
 
   // Retrieve all Arrivals
   app.get("/arrivals", arrivals.findModerated);
+  app.get("/arrivals/:page", arrivals.findModerated);
   
   // Retrieve all Arrival stories
   app.get("/arrivals/stories", arrivals.findModeratedStory);
