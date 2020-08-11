@@ -119,14 +119,13 @@ Arrival.findById = (arrivalId, result) => {
   });
 };
 
-Arrival.getModerated = (page, result) => {
+Arrival.getModerated = result => {
   sql.query("SELECT ID, date, name, story_mod FROM arrivals WHERE moderated = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
-    console.log("Getting arrivals archive page "+ page);
     result(null, res);
   });
 };
