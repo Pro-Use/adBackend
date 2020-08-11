@@ -34,7 +34,11 @@ exports.create = (req, res) => {
 
 // Retrieve all Arrivals from the database.
 exports.findModerated = (req, res) => {
-  Model.Arrival.getModerated((err, data) => {
+  console.log("page="+req.params.page);
+  if (!req.params.page){
+      req.params.page = 0;
+  }
+  Model.Arrival.getModerated(req.params.page,(err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -46,9 +50,7 @@ exports.findModerated = (req, res) => {
 
 // Retrieve all Arrival stories from the database.
 exports.findModeratedStory = (req, res) => {
-  console.log("page="+req.params.page);
-      req.params.page = 0;
-  Model.Arrival.getModeratedStory(req.params.page, (err, data) => {
+  Model.Arrival.getModeratedStory((err, data) => {
     if (err)
       res.status(500).send({
         message:
