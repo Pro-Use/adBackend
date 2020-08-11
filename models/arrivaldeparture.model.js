@@ -120,7 +120,7 @@ Arrival.findById = (arrivalId, result) => {
 };
 
 Arrival.getModerated = (page, result) => {
-  sql.query("SELECT ID, date, name, story_mod FROM arrivals WHERE moderated = 1 ORDER BY ID ASC", (err, res) => {
+  sql.query("SELECT ID, date, name, story_mod FROM arrivals WHERE moderated = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -132,7 +132,7 @@ Arrival.getModerated = (page, result) => {
 };
 
 Arrival.getModeratedStory = result => {
-  sql.query("SELECT ID, date, name, story_mod FROM arrivals WHERE moderated = 1", (err, res) => {
+  sql.query("SELECT ID, date, name, story FROM arrivals WHERE moderated = 1 AND story_mod = 1", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
