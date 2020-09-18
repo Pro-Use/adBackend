@@ -78,7 +78,11 @@ exports.Moderate = (name, result) => {
                               result(moderated);
 
                           }
-                        } moderated = 0;
+                        } else {
+                            console.log(error);
+                            moderated = 0;
+                            result(moderated);
+                        }
                       });
                 } else {
                     moderated = 1;
