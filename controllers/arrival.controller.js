@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     geo: req.body.geo,
     email: req.body.email,
-    moderated: 0,
+    moderated: req.body.moderated,
     displayed: 0,
     story: req.body.story,
     story_mod: 0

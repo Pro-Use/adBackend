@@ -66,7 +66,7 @@ Arrival.create = (newArrival, result) => {
       newArrival.moderated = moderated;
   }
   
-  moderate.Moderate(newArrival.name, modRes => {
+  moderate.Moderate(newArrival.name, newArrival.moderated, modRes => {
     console.log(modRes);
     newArrival.moderated = modRes;
     if (newArrival.moderated < 2) {
@@ -354,7 +354,7 @@ Departure.create = (newDeparture, result) => {
       newDeparture.moderated = moderated;
   }
   
-  moderate.Moderate(newDeparture.name, modRes => {
+  moderate.Moderate(newDeparture.name, newDeparture.moderated, modRes => {
     console.log(modRes);
     newDeparture.moderated = modRes;
     sql.query(["INSERT INTO departures SET ?", newDeparture], (err, res) => {

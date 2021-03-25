@@ -6,7 +6,12 @@ const sql = require("./db.js");
 var errors = 0;
 var census_matches = 0;
 
-exports.Moderate = (name, result) => {
+exports.Moderate = (name, mod_switch, result) => {
+    if (mod_switch === 0){
+        console.log("Strict Moderation Turned ON, Skipping Modertaion.")
+        result(0);
+        return;
+    }
     sql.query(`SELECT * FROM names WHERE name = "${name.toUpperCase()}"`, (err, res) => {
         if (err) {
           console.log("error: ", err);
